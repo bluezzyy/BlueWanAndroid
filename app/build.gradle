@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.bluelzy.bluewanandroid"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures{
+        dataBinding = true
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$versions.coreKtxVersion"
+
+    //Support Library
+    implementation "androidx.appcompat:appcompat:$versions.appCompatVersion"
+    implementation "com.google.android.material:material:$versions.materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintVersion"
+
+    //Architecture Components
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$versions.fragmentKtxVersion"
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment:$versions.navigationVersion"
+    implementation "androidx.navigation:navigation-ui:$versions.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$versions.navigationVersion"
+
+    //NetWork
+    implementation "com.squareup.okhttp3:okhttp:$versions.okhttpVersion"
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.gsonVersion"
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
+
+    //RxJava
+    implementation "io.reactivex.rxjava3:rxandroid:$versions.rxAndroidVersion"
+    implementation "io.reactivex.rxjava3:rxjava:$versions.rxJavaVersion"
+
+    //Koin
+    implementation "org.koin:koin-android:$versions.koinVersion"
+    implementation "org.koin:koin-android-scope:$versions.koinVersion"
+    implementation "org.koin:koin-android-viewmodel:$versions.koinVersion"
+
+    // Test
+    testImplementation "junit:junit:$versions.junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$versions.extJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoVersion"
+
+    // debugging
+    implementation "com.jakewharton.timber:timber:$versions.timberVersion"
+
+}
