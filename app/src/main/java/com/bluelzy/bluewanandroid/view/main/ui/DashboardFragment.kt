@@ -1,4 +1,4 @@
-package com.bluelzy.bluewanandroid.main.view
+package com.bluelzy.bluewanandroid.view.main.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bluelzy.bluewanandroid.R
-import com.bluelzy.bluewanandroid.main.viewmodel.DashboardViewModel
+import com.bluelzy.bluewanandroid.view.main.viewmodel.DashboardViewModel
 
 class DashboardFragment : Fragment() {
 

@@ -49,6 +49,8 @@ dependencies {
 
     //Architecture Components
     implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.fragmentKtxVersion"
 
     //Navigation
@@ -58,8 +60,10 @@ dependencies {
 
     //NetWork
     implementation "com.squareup.okhttp3:okhttp:$versions.okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttpVersion"
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$versions.gsonVersion"
+
 
     //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutinesVersion"

@@ -2,6 +2,8 @@ package com.bluelzy.bluewanandroid
 
 import android.app.Application
 import com.bluelzy.bluewanandroid.di.networkModule
+import com.bluelzy.bluewanandroid.di.repositoryModule
+import com.bluelzy.bluewanandroid.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -19,6 +21,8 @@ class BlueWanApplication : Application() {
         startKoin {
             androidContext(this@BlueWanApplication)
             modules(networkModule)
+            modules(viewModelModule)
+            modules(repositoryModule)
         }
 
         if (BuildConfig.DEBUG) {

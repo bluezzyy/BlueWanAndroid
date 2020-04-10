@@ -1,4 +1,4 @@
-package com.bluelzy.bluewanandroid.main.viewmodel
+package com.bluelzy.bluewanandroid.view.main.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

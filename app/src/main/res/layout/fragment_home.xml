@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.bluelzy.bluewanandroid.main.viewmodel.HomeViewModel" />
+            type="com.bluelzy.bluewanandroid.view.main.viewmodel.HomeViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.view.HomeFragment">
+        tools:context=".view.main.ui.HomeFragment">
 
         <TextView
             android:id="@+id/text_home"
