@@ -2,7 +2,6 @@ package com.bluelzy.bluewanandroid.view.main.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.bluelzy.bluewanandroid.base.LiveCoroutinesViewModel
 import com.bluelzy.bluewanandroid.model.DashboardArticleModel
@@ -14,8 +13,10 @@ class HomeViewModel constructor(
 ) : LiveCoroutinesViewModel() {
 
     private var articleFetchingLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    val articleLiveData : LiveData<DashboardArticleModel>
+    val articleLiveData: LiveData<DashboardArticleModel>
     val toastLiveData: MutableLiveData<String> = MutableLiveData()
+
+    private var page: Int = 0
 
     init {
         Timber.d("injection MainViewModel")
@@ -23,10 +24,14 @@ class HomeViewModel constructor(
         // Get Data
         articleLiveData = this.articleFetchingLiveData.switchMap {
             launchOnViewModelScope {
-                mainRepository.loadDashboardArticles { toastLiveData.postValue(it) }
+                mainRepository.loadDashboardArticles(page) { toastLiveData.postValue(it) }
             }
         }
     }
 
-    fun fetchArticles() = articleFetchingLiveData.postValue(true)
+    fun fetchArticles() = launchOnViewModelScope {
+        mainRepository.loadDashboardArticles(++page) {
+            toastLiveData.postValue(it)
+        }
+    }
 }

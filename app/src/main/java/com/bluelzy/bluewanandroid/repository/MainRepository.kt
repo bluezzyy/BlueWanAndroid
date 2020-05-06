@@ -25,11 +25,13 @@ class MainRepository constructor(
         Timber.d("Injection MainRepository")
     }
 
-    suspend fun loadDashboardArticles(error: (String) -> Unit) = withContext(Dispatchers.IO) {
+    suspend fun loadDashboardArticles(
+        page: Int,
+        error: (String) -> Unit) = withContext(Dispatchers.IO) {
         val liveData = MutableLiveData<DashboardArticleModel>()
         var articles = DashboardArticleModel()
         isLoading = true
-        mainClient.fetchDashboardArticles { response ->
+        mainClient.fetchDashboardArticles(page) { response ->
             isLoading = false
             when (response) {
                 is ApiResponse.Success -> {

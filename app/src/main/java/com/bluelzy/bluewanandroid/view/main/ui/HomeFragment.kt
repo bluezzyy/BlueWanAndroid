@@ -12,8 +12,6 @@ import org.koin.android.viewmodel.ext.android.getViewModel
 
 class HomeFragment : BaseDataBindingFragment() {
 
-    private lateinit var binding: FragmentHomeBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -22,13 +20,14 @@ class HomeFragment : BaseDataBindingFragment() {
         return binding<FragmentHomeBinding>(inflater, R.layout.fragment_home, container).apply {
             viewModel = getViewModel<HomeViewModel>()
             lifecycleOwner = this@HomeFragment
-            binding = this
         }.root
     }
 
     override fun initView() {}
 
-    override fun initData() {}
+    override fun initData() {
+
+    }
 
 
 }

@@ -10,8 +10,8 @@ import com.bluelzy.bluewanandroid.model.DashboardArticleModel
  */
 class MainClient(private val blueWanAndroidService: BlueWanAndroidService) {
 
-    fun fetchDashboardArticles(onResult: (response: ApiResponse<DashboardArticleModel>) -> Unit) {
-        this.blueWanAndroidService.fetchDashboardArticles(0).transform(onResult)
+    fun fetchDashboardArticles(page: Int, onResult: (response: ApiResponse<DashboardArticleModel>) -> Unit) {
+        this.blueWanAndroidService.fetchDashboardArticles(page).transform(onResult)
     }
 
 }
