@@ -6,6 +6,7 @@ import com.bluelzy.bluewanandroid.di.repositoryModule
 import com.bluelzy.bluewanandroid.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import timber.log.Timber
 
 /**
  *   @author    BlueLzy
@@ -27,6 +28,7 @@ class BlueWanApplication : Application() {
 
         if (BuildConfig.DEBUG) {
             // logging
+            Timber.plant(Timber.DebugTree())
         }
     }
 

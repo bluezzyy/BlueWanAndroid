@@ -13,25 +13,24 @@ class HomeViewModel constructor(
 ) : LiveCoroutinesViewModel() {
 
     private var articleFetchingLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    val articleLiveData: LiveData<DashboardArticleModel>
-    val toastLiveData: MutableLiveData<String> = MutableLiveData()
+    var articleLiveData: LiveData<DashboardArticleModel>
+    var toastLiveData: MutableLiveData<String> = MutableLiveData()
 
     private var page: Int = 0
 
     init {
         Timber.d("injection MainViewModel")
 
-        // Get Data
-        articleLiveData = this.articleFetchingLiveData.switchMap {
-            launchOnViewModelScope {
-                mainRepository.loadDashboardArticles(page) { toastLiveData.postValue(it) }
-            }
+        articleLiveData = launchOnViewModelScope {
+            mainRepository.loadDashboardArticles(page) { toastLiveData.postValue(it) }
         }
     }
 
-    fun fetchArticles() = launchOnViewModelScope {
-        mainRepository.loadDashboardArticles(++page) {
-            toastLiveData.postValue(it)
+    fun loadMoreArticles() {
+        articleLiveData = this.articleFetchingLiveData.switchMap {
+            launchOnViewModelScope {
+                mainRepository.loadDashboardArticles(++page) { toastLiveData.postValue(it) }
+            }
         }
     }
 }

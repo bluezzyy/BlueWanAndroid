@@ -9,6 +9,10 @@
             name="viewModel"
             type="com.bluelzy.bluewanandroid.view.main.viewmodel.HomeViewModel" />
 
+        <variable
+            name="adapter"
+            type="com.bluelzy.bluewanandroid.adapter.HomeDelegateMultiAdapter" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,11 +22,16 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_home_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="0dp"
-            android:layout_height="0dp" />
+            android:layout_height="0dp"
+            app:adapter="@{adapter}"
+            app:adapterArticleList="@{viewModel.articleLiveData.data.articles}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:toast="@{viewModel.toastLiveData}"
+            tools:listitem="@layout/item_dashboard_article" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

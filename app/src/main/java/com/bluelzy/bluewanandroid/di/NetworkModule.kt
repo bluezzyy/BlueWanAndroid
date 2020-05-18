@@ -2,12 +2,9 @@ package com.bluelzy.bluewanandroid.di
 
 import com.bluelzy.bluewanandroid.network.BlueWanAndroidService
 import com.bluelzy.bluewanandroid.network.MainClient
-import com.bluelzy.bluewanandroid.view.main.ui.MainActivity
-import com.bluelzy.bluewanandroid.view.main.viewmodel.HomeViewModel
 import com.bluelzy.bluewanandroid.network.RequestInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,13 +24,13 @@ val networkModule = module {
             .build()
     }
 
-   single {
-       Retrofit.Builder()
-           .client(get<OkHttpClient>())
-           .baseUrl("https://www.wanandroid.com/")
-           .addConverterFactory(GsonConverterFactory.create())
-           .build()
-   }
+    single {
+        Retrofit.Builder()
+            .client(get<OkHttpClient>())
+            .baseUrl("https://www.wanandroid.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
     single { get<Retrofit>().create(BlueWanAndroidService::class.java) }
 

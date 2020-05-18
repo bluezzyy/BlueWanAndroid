@@ -27,7 +27,8 @@ class MainRepository constructor(
 
     suspend fun loadDashboardArticles(
         page: Int,
-        error: (String) -> Unit) = withContext(Dispatchers.IO) {
+        error: (String) -> Unit
+    ) = withContext(Dispatchers.IO) {
         val liveData = MutableLiveData<DashboardArticleModel>()
         var articles = DashboardArticleModel()
         isLoading = true
@@ -44,6 +45,6 @@ class MainRepository constructor(
                 is ApiResponse.Failure.Exception -> error(response.message())
             }
         }
-        liveData.apply { postValue(articles) }
+        liveData.apply { this.postValue(articles) }
     }
 }
