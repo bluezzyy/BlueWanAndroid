@@ -24,15 +24,11 @@ abstract class BaseDataBindingFragment : Fragment() {
         container: ViewGroup?
     ) : T = DataBindingUtil.inflate(inflater, resId, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        initView()
-
+    override fun onResume() {
+        super.onResume()
         initData()
     }
 
-    abstract fun initView()
-
     abstract fun initData()
+
 }

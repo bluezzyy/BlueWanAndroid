@@ -1,33 +1,24 @@
 package com.bluelzy.bluewanandroid.view.main.ui
 
 import android.os.Bundle
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.base.BaseDataBindingActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.bluelzy.bluewanandroid.databinding.ActivityMainBinding
+import com.bluelzy.bluewanandroid.extensions.applyExitMaterialTransform
+import com.bluelzy.bluewanandroid.view.main.adapter.MainPagerAdapter
 
 class MainActivity : BaseDataBindingActivity() {
 
+    private val binding: ActivityMainBinding by binding(R.layout.activity_main)
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        applyExitMaterialTransform()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        binding.apply {
+            pagerAdapter = MainPagerAdapter(supportFragmentManager)
+            navigation = mainBottomNavigation
+        }
 
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home,
-                R.id.navigation_dashboard,
-                R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
     }
 }

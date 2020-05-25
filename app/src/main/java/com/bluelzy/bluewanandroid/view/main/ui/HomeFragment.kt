@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.adapter.HomeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.base.BaseDataBindingFragment
@@ -12,7 +11,6 @@ import com.bluelzy.bluewanandroid.databinding.FragmentHomeBinding
 import com.bluelzy.bluewanandroid.view.main.viewmodel.HomeViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.KoinComponent
-import timber.log.Timber
 
 class HomeFragment : BaseDataBindingFragment(), KoinComponent {
 
@@ -30,18 +28,8 @@ class HomeFragment : BaseDataBindingFragment(), KoinComponent {
         }.root
     }
 
-    override fun initView() {
-
-    }
-
     override fun initData() {
-        homeViewModel.articleLiveData.observe(this@HomeFragment, Observer {
-            Timber.d("------------ %s", it.data?.articles?.size)
-        })
-
-        homeViewModel.toastLiveData.observe(this@HomeFragment, Observer {
-            Timber.d("---------------- $it")
-        })
+        homeViewModel.fetchArticles()
     }
 
 }

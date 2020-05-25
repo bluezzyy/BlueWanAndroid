@@ -31,20 +31,21 @@ class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolde
         }
     }
 
-    private fun setupArticleType(holder: BaseViewHolder, item: Article) {
-        holder.setText(R.id.tv_article_title, item.title)
-        holder.setText(
-            R.id.tv_article_share_user,
-            String.format(context.getString(R.string.dashboard_share_user, item.shareUser))
-        )
-        holder.setText(
-            R.id.tv_article_time,
-            String.format(
-                context.getString(R.string.dashboard_share_time),
-                item.shareDate.toString()
+    private fun setupArticleType(holder: BaseViewHolder, item: Article) =
+        with(holder) {
+            setText(R.id.tv_article_title, item.title)
+            setText(
+                R.id.tv_article_share_user,
+                String.format(context.getString(R.string.dashboard_share_user, item.shareUser))
             )
-        )
-    }
+            setText(
+                R.id.tv_article_time,
+                String.format(
+                    context.getString(R.string.dashboard_share_time),
+                    item.niceShareDate
+                )
+            )
+        }
 
     companion object {
         const val VIEW_TYPE_ARTICLE = 0

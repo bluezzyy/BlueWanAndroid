@@ -33,4 +33,6 @@ class HomeViewModel constructor(
             }
         }
     }
+
+    fun fetchArticles() = this.articleFetchingLiveData.postValue(true)
 }
