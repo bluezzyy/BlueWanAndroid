@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">BlueWanAndroid</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">玩Android</string>
+    <string name="title_home">首页</string>
+    <string name="title_knowledge">知识体系</string>
+    <string name="title_project">项目</string>
 
     <!-- Dashboard -->
     <string name="dashboard_share_user">分享人： %s</string>

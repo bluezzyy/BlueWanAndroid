@@ -9,22 +9,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bluelzy.bluewanandroid.R
-import com.bluelzy.bluewanandroid.view.main.viewmodel.NotificationsViewModel
+import com.bluelzy.bluewanandroid.view.main.viewmodel.ProjectViewModel
 
-class NotificationsFragment : Fragment() {
+class ProjectFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var projectViewModel: ProjectViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
+        projectViewModel =
+                ViewModelProviders.of(this).get(ProjectViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_project, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+        projectViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

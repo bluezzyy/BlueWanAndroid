@@ -9,27 +9,19 @@ import com.bluelzy.bluewanandroid.adapter.HomeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.base.BaseDataBindingFragment
 import com.bluelzy.bluewanandroid.databinding.FragmentHomeBinding
 import com.bluelzy.bluewanandroid.view.main.viewmodel.HomeViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.android.viewmodel.ext.android.getViewModel
 import org.koin.core.KoinComponent
 
 class HomeFragment : BaseDataBindingFragment(), KoinComponent {
-
-    private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return binding<FragmentHomeBinding>(inflater, R.layout.fragment_home, container).apply {
-            viewModel = homeViewModel
+    ): View? = binding<FragmentHomeBinding>(inflater, R.layout.fragment_home, container)
+        .apply {
+            viewModel = getViewModel<HomeViewModel>().apply { fetchArticles() }
             lifecycleOwner = this@HomeFragment
             adapter = HomeDelegateMultiAdapter()
         }.root
-    }
-
-    override fun initData() {
-        homeViewModel.fetchArticles()
-    }
-
 }

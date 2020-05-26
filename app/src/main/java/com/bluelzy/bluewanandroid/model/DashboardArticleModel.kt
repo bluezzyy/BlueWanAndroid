@@ -1,6 +1,7 @@
 package com.bluelzy.bluewanandroid.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 /**
  *   @author    BlueLzy

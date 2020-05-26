@@ -19,6 +19,5 @@ class MainActivity : BaseDataBindingActivity() {
             pagerAdapter = MainPagerAdapter(supportFragmentManager)
             navigation = mainBottomNavigation
         }
-
     }
 }

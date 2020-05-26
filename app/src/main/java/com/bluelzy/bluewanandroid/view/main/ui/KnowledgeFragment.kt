@@ -9,22 +9,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bluelzy.bluewanandroid.R
-import com.bluelzy.bluewanandroid.view.main.viewmodel.DashboardViewModel
+import com.bluelzy.bluewanandroid.view.main.viewmodel.KnowledgeViewModel
 
-class DashboardFragment : Fragment() {
+class KnowledgeFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var knowledgeViewModel: KnowledgeViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        knowledgeViewModel =
+                ViewModelProviders.of(this).get(KnowledgeViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_knowledge, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        knowledgeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

@@ -19,9 +19,9 @@ package com.bluelzy.bluewanandroid.view.main.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.bluelzy.bluewanandroid.view.main.ui.DashboardFragment
+import com.bluelzy.bluewanandroid.view.main.ui.KnowledgeFragment
 import com.bluelzy.bluewanandroid.view.main.ui.HomeFragment
-import com.bluelzy.bluewanandroid.view.main.ui.NotificationsFragment
+import com.bluelzy.bluewanandroid.view.main.ui.ProjectFragment
 
 class MainPagerAdapter(fm: FragmentManager) :
   FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -29,8 +29,8 @@ class MainPagerAdapter(fm: FragmentManager) :
   override fun getItem(position: Int): Fragment {
     return when (position) {
       0 -> HomeFragment()
-      1 -> DashboardFragment()
-      else -> NotificationsFragment()
+      1 -> KnowledgeFragment()
+      else -> ProjectFragment()
     }
   }
 

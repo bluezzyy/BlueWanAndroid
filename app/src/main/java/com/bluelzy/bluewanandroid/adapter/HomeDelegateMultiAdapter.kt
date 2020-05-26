@@ -5,6 +5,7 @@ import com.bluelzy.bluewanandroid.model.Article
 import com.chad.library.adapter.base.BaseDelegateMultiAdapter
 import com.chad.library.adapter.base.delegate.BaseMultiTypeDelegate
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import timber.log.Timber
 
 /**
  *   @author : BlueLzy
@@ -21,8 +22,7 @@ class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolde
             }
         })
 
-        getMultiTypeDelegate()
-            ?.addItemType(VIEW_TYPE_ARTICLE, R.layout.item_dashboard_article)
+        getMultiTypeDelegate()!!.addItemType(VIEW_TYPE_ARTICLE, R.layout.item_dashboard_article)
     }
 
     override fun convert(holder: BaseViewHolder, item: Article) {
@@ -31,7 +31,7 @@ class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolde
         }
     }
 
-    private fun setupArticleType(holder: BaseViewHolder, item: Article) =
+    private fun setupArticleType(holder: BaseViewHolder, item: Article) {
         with(holder) {
             setText(R.id.tv_article_title, item.title)
             setText(
@@ -46,6 +46,7 @@ class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolde
                 )
             )
         }
+    }
 
     companion object {
         const val VIEW_TYPE_ARTICLE = 0
