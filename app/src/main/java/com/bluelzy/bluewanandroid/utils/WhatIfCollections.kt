@@ -32,6 +32,13 @@ inline fun <T> T?.whatIfNotNull(
 }
 
 @WhatIfInlineOnly
+inline fun <T> T?.whatIfNull(
+    defaultValue: () -> T
+): T {
+    return this ?: defaultValue()
+}
+
+@WhatIfInlineOnly
 inline fun <T> List<T>?.whatIfNotNullOrEmpty(
     whatIf: (List<T>) -> Unit
 ) {

@@ -21,18 +21,19 @@ class HomeViewModel constructor(
     init {
         Timber.d("injection MainViewModel")
 
-        articleLiveData = launchOnViewModelScope {
-            mainRepository.loadDashboardArticles(page) { toastLiveData.postValue(it) }
+        articleLiveData = this.articleFetchingLiveData.switchMap{
+            launchOnViewModelScope {
+                mainRepository.loadDashboardArticles(page) { toastLiveData.postValue(it) }
+            }
         }
     }
 
     fun loadMoreArticles() {
-        articleLiveData = this.articleFetchingLiveData.switchMap {
-            launchOnViewModelScope {
+        articleLiveData = launchOnViewModelScope {
                 mainRepository.loadDashboardArticles(++page) { toastLiveData.postValue(it) }
             }
         }
-    }
+
 
     fun fetchArticles() = this.articleFetchingLiveData.postValue(true)
 }
