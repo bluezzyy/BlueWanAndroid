@@ -5,7 +5,6 @@ import com.bluelzy.bluewanandroid.model.Article
 import com.chad.library.adapter.base.BaseDelegateMultiAdapter
 import com.chad.library.adapter.base.delegate.BaseMultiTypeDelegate
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import timber.log.Timber
 
 /**
  *   @author : BlueLzy
@@ -22,7 +21,10 @@ class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolde
             }
         })
 
-        getMultiTypeDelegate()!!.addItemType(VIEW_TYPE_ARTICLE, R.layout.item_dashboard_article)
+        getMultiTypeDelegate()?.addItemType(VIEW_TYPE_ARTICLE, R.layout.item_dashboard_article)
+            .let {
+                this.addChildClickViewIds(R.id.iv_favourite_article)
+            }
     }
 
     override fun convert(holder: BaseViewHolder, item: Article) {

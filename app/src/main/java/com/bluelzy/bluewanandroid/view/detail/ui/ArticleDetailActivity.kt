@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.bluelzy.bluewanandroid.R
@@ -49,11 +50,33 @@ class ArticleDetailActivity : BaseDataBindingActivity() {
         }
     }
 
+    private var myWebViewClient = object : WebViewClient() {
+        override fun shouldOverrideUrlLoading(
+            view: WebView?,
+            request: WebResourceRequest?
+        ): Boolean {
+            val url = request?.url.toString()
+            if (url.startsWith("weixin://") //微信
+                || url.startsWith("alipays://") //支付宝
+                || url.startsWith("mailto://") //邮件
+                || url.startsWith("tel://")//电话
+                || url.startsWith("dianping://")//大众点评
+                || url.startsWith("tbopen://")//淘宝
+                || url.startsWith("openapp.jdmobile://")//淘宝
+                || url.startsWith("tmast://") // 淘宝
+            ) {
+                return true
+            }
+
+            return super.shouldOverrideUrlLoading(view, request)
+        }
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
         with(binding.wvContent) {
             webChromeClient = myWebChromeClient
-            webViewClient = WebViewClient()
+            webViewClient = myWebViewClient
             settings.javaScriptEnabled = true
         }
         binding.wvContent.loadUrl(intent.getStringExtra(KEY_ARTICLE_LINK))

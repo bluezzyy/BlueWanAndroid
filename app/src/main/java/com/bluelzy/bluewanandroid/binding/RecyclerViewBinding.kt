@@ -12,6 +12,7 @@ import com.bluelzy.bluewanandroid.utils.whatIfNotNullOrEmpty
 import com.bluelzy.bluewanandroid.view.detail.ui.ArticleDetailActivity
 import com.chad.library.adapter.base.BaseDelegateMultiAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import timber.log.Timber
 
 /**
  *   @author    BlueLzy
@@ -33,7 +34,7 @@ fun bindAdapter(view: RecyclerView, adapter: BaseDelegateMultiAdapter<Article, B
 }
 
 @BindingAdapter("itemClick")
-fun bindItemClick(view: RecyclerView, adapter: BaseDelegateMultiAdapter<Article, BaseViewHolder>) {
+fun bindArticleItemClick(view: RecyclerView, adapter: BaseDelegateMultiAdapter<Article, BaseViewHolder>) {
     adapter.setOnItemClickListener { _, _, position ->
         ArticleDetailActivity.newInstance(
             view.context,
@@ -41,10 +42,16 @@ fun bindItemClick(view: RecyclerView, adapter: BaseDelegateMultiAdapter<Article,
             adapter.getItem(position)
         )
     }
+    adapter.setOnItemChildClickListener { _, itemView, _ ->
+        if (itemView.id == R.id.iv_favourite_article) {
+            // TODO: 添加收藏功能
+            Timber.tag("BlueLzy").d("heart click...")
+        }
+    }
 }
 
 @BindingAdapter("adapterArticleList")
-fun bindAdapterPosterLIst(view: RecyclerView, article: List<Article>?) {
+fun bindAdapterArticleList(view: RecyclerView, article: List<Article>?) {
     article.whatIfNotNullOrEmpty {
         (view.adapter as? HomeDelegateMultiAdapter)?.setList(it)
     }
