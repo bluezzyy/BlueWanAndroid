@@ -33,7 +33,8 @@
     <color name="color_28">#7A658A</color>
     <color name="black">#000000</color>
     <color name="white">#F3F3F4</color>
-    <color name="grey">#DCD5CBCB</color>
+    <color name="light_grey">#A3DADADA</color>
+    <color name="grey">#DC807F7F</color>
     <color name="color_30">#E8E765</color>
     <color name="color_31">#AD79B5</color>
     <color name="color_32">#55A86F</color>
