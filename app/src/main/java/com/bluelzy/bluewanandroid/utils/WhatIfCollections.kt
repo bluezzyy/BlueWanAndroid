@@ -32,6 +32,18 @@ inline fun <T> T?.whatIfNotNull(
 }
 
 @WhatIfInlineOnly
+inline fun <CharSequence> CharSequence?.whatIfNotNullAndEmpty(
+    whatIf: (CharSequence) -> Unit,
+    whatIfNot: (CharSequence?) -> Unit
+) {
+    if (this != null && this != "" && this != "null") {
+        whatIf(this)
+    } else {
+        whatIfNot(this)
+    }
+}
+
+@WhatIfInlineOnly
 inline fun <T> T?.whatIfNull(
     defaultValue: () -> T
 ): T {

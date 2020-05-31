@@ -91,5 +91,8 @@ dependencies {
     // debugging
     implementation "com.jakewharton.timber:timber:$versions.timberVersion"
 
+    // Paging
+    implementation "androidx.paging:paging-runtime-ktx:$versions.pagingVersion"
+
 
 }

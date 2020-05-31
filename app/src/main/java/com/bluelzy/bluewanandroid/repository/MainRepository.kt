@@ -27,6 +27,7 @@ class MainRepository constructor(
 
     suspend fun loadDashboardArticles(
         page: Int,
+        success: (DashboardArticleModel) -> Unit,
         error: (String) -> Unit
     ) = withContext(Dispatchers.IO) {
         val liveData = MutableLiveData<DashboardArticleModel>()
@@ -38,7 +39,7 @@ class MainRepository constructor(
                 is ApiResponse.Success -> {
                     response.data?.let {
                         articles = it
-                        liveData.postValue(it)
+                        success(it)
                     }
                 }
                 is ApiResponse.Failure.Error -> error(response.message())

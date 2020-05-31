@@ -1,39 +1,41 @@
 package com.bluelzy.bluewanandroid.view.main.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
+import androidx.paging.DataSource
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.bluelzy.bluewanandroid.base.LiveCoroutinesViewModel
-import com.bluelzy.bluewanandroid.model.DashboardArticleModel
-import com.bluelzy.bluewanandroid.repository.MainRepository
+import com.bluelzy.bluewanandroid.model.Article
+import com.bluelzy.bluewanandroid.paging.ArticleDataSource
 import timber.log.Timber
 
-class HomeViewModel constructor(
-    private val mainRepository: MainRepository
-) : LiveCoroutinesViewModel() {
+class HomeViewModel : LiveCoroutinesViewModel() {
 
-    private var articleFetchingLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    var articleLiveData: LiveData<DashboardArticleModel>
-    var toastLiveData: MutableLiveData<String> = MutableLiveData()
-
-    private var page: Int = 0
+    var postListData: LiveData<PagedList<Article>>
 
     init {
         Timber.d("injection MainViewModel")
 
-        articleLiveData = this.articleFetchingLiveData.switchMap{
-            launchOnViewModelScope {
-                mainRepository.loadDashboardArticles(page) { toastLiveData.postValue(it) }
-            }
-        }
+        val config = PagedList.Config.Builder()
+            .setPageSize(PAGE_SIZE)
+            .setEnablePlaceholders(false)
+            .build()
+
+        postListData = initializedPagedListBuilder(config).build()
     }
 
-    fun loadMoreArticles() {
-        articleLiveData = launchOnViewModelScope {
-                mainRepository.loadDashboardArticles(++page) { toastLiveData.postValue(it) }
+    private fun initializedPagedListBuilder(config: PagedList.Config): LivePagedListBuilder<Int, Article> {
+        val dataSource = object : DataSource.Factory<Int, Article>() {
+            override fun create(): DataSource<Int, Article> {
+                return ArticleDataSource(viewModelScope)
             }
         }
+        return LivePagedListBuilder(dataSource, config)
+    }
 
-
-    fun fetchArticles() = this.articleFetchingLiveData.postValue(true)
+    companion object {
+        private const val PAGE_SIZE = 10
+        private const val PREFETCH_DISTANCE = 3
+    }
 }

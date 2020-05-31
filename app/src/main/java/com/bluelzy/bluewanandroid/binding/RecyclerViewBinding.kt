@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.adapter.HomeDelegateMultiAdapter
+import com.bluelzy.bluewanandroid.adapter.HomePagingAdapter
 import com.bluelzy.bluewanandroid.model.Article
 import com.bluelzy.bluewanandroid.utils.whatIfNotNull
 import com.bluelzy.bluewanandroid.utils.whatIfNotNullOrEmpty
@@ -29,7 +30,7 @@ fun bindToast(view: RecyclerView, text: LiveData<String>) {
 }
 
 @BindingAdapter("adapter")
-fun bindAdapter(view: RecyclerView, adapter: BaseDelegateMultiAdapter<Article, BaseViewHolder>) {
+fun bindAdapter(view: RecyclerView, adapter: HomePagingAdapter) {
     view.adapter = adapter
 }
 
