@@ -19,6 +19,17 @@ inline fun <T> T?.whatIfNotNull(
 }
 
 @WhatIfInlineOnly
+inline fun <String> String?.whatIfStringNotNullOrEmpty(
+    whatIf: (String) -> Unit,
+    whatIfNot: (String?) -> Unit
+) {
+    if (this == null || this == "") {
+        whatIfNot(this)
+    } else {
+        whatIf(this)
+    }
+}
+
 inline fun <T> T?.whatIfNotNull(
     whatIf: (T) -> Unit,
     whatIfNot: (T?) -> Unit

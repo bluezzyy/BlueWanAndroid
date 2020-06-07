@@ -6,34 +6,27 @@ import androidx.lifecycle.switchMap
 import com.bluelzy.bluewanandroid.base.LiveCoroutinesViewModel
 import com.bluelzy.bluewanandroid.model.DashboardArticleModel
 import com.bluelzy.bluewanandroid.repository.MainRepository
+import org.koin.core.KoinComponent
 import timber.log.Timber
 
 class HomeViewModel constructor(
     private val mainRepository: MainRepository
-) : LiveCoroutinesViewModel() {
+) : LiveCoroutinesViewModel(), KoinComponent {
 
-    private var articleFetchingLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    private var articleFetchingLiveData: MutableLiveData<Int> = MutableLiveData()
     var articleLiveData: LiveData<DashboardArticleModel>
     var toastLiveData: MutableLiveData<String> = MutableLiveData()
 
-    private var page: Int = 0
+    var page: Int = 0
 
     init {
-        Timber.d("injection MainViewModel")
-
-        articleLiveData = this.articleFetchingLiveData.switchMap{
+        Timber.d("injection HomeViewModel")
+        articleLiveData = this.articleFetchingLiveData.switchMap {
             launchOnViewModelScope {
-                mainRepository.loadDashboardArticles(page) { toastLiveData.postValue(it) }
+                mainRepository.loadDashboardArticles(it) { toastLiveData.postValue(it) }
             }
         }
     }
 
-    fun loadMoreArticles() {
-        articleLiveData = launchOnViewModelScope {
-                mainRepository.loadDashboardArticles(++page) { toastLiveData.postValue(it) }
-            }
-        }
-
-
-    fun fetchArticles() = this.articleFetchingLiveData.postValue(true)
+    fun fetchArticles() = this.articleFetchingLiveData.postValue(page++)
 }

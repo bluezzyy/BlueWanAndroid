@@ -5,6 +5,7 @@
     <string name="title_project">项目</string>
 
     <!-- Dashboard -->
+    <string name="dashboard_author">作者： %s</string>
     <string name="dashboard_share_user">分享人： %s</string>
     <string name="dashboard_share_time">时间： %s</string>
 </resources>

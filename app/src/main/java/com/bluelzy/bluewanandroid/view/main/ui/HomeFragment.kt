@@ -14,14 +14,26 @@ import org.koin.core.KoinComponent
 
 class HomeFragment : BaseDataBindingFragment(), KoinComponent {
 
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var adapter: HomeDelegateMultiAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = binding<FragmentHomeBinding>(inflater, R.layout.fragment_home, container)
         .apply {
-            viewModel = getViewModel<HomeViewModel>().apply { fetchArticles() }
             lifecycleOwner = this@HomeFragment
-            adapter = HomeDelegateMultiAdapter()
+            viewModel = getViewModel<HomeViewModel>().apply {
+                this@HomeFragment.viewModel = this
+                fetchArticles()
+            }
+            adapter = HomeDelegateMultiAdapter().apply {
+                this@HomeFragment.adapter = this
+                loadMoreModule.setOnLoadMoreListener {
+                    (viewModel as HomeViewModel).fetchArticles()
+                }
+            }
         }.root
+
 }

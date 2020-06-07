@@ -2,8 +2,10 @@ package com.bluelzy.bluewanandroid.adapter
 
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.model.Article
+import com.bluelzy.bluewanandroid.utils.whatIfStringNotNullOrEmpty
 import com.chad.library.adapter.base.BaseDelegateMultiAdapter
 import com.chad.library.adapter.base.delegate.BaseMultiTypeDelegate
+import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
 /**
@@ -12,7 +14,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
  *   @date   : 2020/05/17
  *   @desc   : Dashboard Multi Item Type Adapter
  */
-class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolder>() {
+class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolder>(), LoadMoreModule {
 
     init {
         setMultiTypeDelegate(object : BaseMultiTypeDelegate<Article>() {
@@ -36,17 +38,31 @@ class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolde
     private fun setupArticleType(holder: BaseViewHolder, item: Article) {
         with(holder) {
             setText(R.id.tv_article_title, item.title)
-            setText(
-                R.id.tv_article_share_user,
-                String.format(context.getString(R.string.dashboard_share_user, item.shareUser))
-            )
-            setText(
-                R.id.tv_article_time,
-                String.format(
-                    context.getString(R.string.dashboard_share_time),
-                    item.niceShareDate
+            item.author.whatIfStringNotNullOrEmpty({ author ->
+                setText(
+                    R.id.tv_article_share_user,
+                    String.format(context.getString(R.string.dashboard_author, author))
                 )
-            )
+                setText(
+                    R.id.tv_article_time,
+                    String.format(
+                        context.getString(R.string.dashboard_share_time),
+                        item.niceDate
+                    )
+                )
+            }, {
+                setText(
+                    R.id.tv_article_share_user,
+                    String.format(context.getString(R.string.dashboard_share_user, item.shareUser))
+                )
+                setText(
+                    R.id.tv_article_time,
+                    String.format(
+                        context.getString(R.string.dashboard_share_time),
+                        item.niceShareDate
+                    )
+                )
+            })
         }
     }
 

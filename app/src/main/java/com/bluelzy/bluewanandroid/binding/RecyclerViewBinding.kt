@@ -53,7 +53,10 @@ fun bindArticleItemClick(view: RecyclerView, adapter: BaseDelegateMultiAdapter<A
 @BindingAdapter("adapterArticleList")
 fun bindAdapterArticleList(view: RecyclerView, article: List<Article>?) {
     article.whatIfNotNullOrEmpty {
-        (view.adapter as? HomeDelegateMultiAdapter)?.setList(it)
+        (view.adapter as? HomeDelegateMultiAdapter)?.run {
+            loadMoreModule.loadMoreComplete()
+            addData(it)
+        }
     }
 }
 
