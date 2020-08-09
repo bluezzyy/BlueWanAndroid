@@ -22,17 +22,30 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.bluelzy.bluewanandroid.view.main.ui.HomeFragment
 import com.bluelzy.bluewanandroid.view.main.ui.KnowledgeFragment
 import com.bluelzy.bluewanandroid.view.main.ui.ProjectFragment
+import timber.log.Timber
+
+/**
+ *   @author    BlueLzy
+ *   @email     bluehobert@gmail.com
+ *   @date      2020/5/25
+ *   @desc
+ */
 
 class MainPagerAdapter(fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    override fun getItem(position: Int): Fragment {
-        return when (position) {
+    override fun getItem(position: Int): Fragment =
+        when (position) {
             0 -> HomeFragment()
             1 -> KnowledgeFragment()
-            else -> ProjectFragment()
+            2 -> ProjectFragment()
+            else -> resetToHomeFragment(position)
         }
-    }
 
     override fun getCount() = 3
+
+    private fun resetToHomeFragment(position: Int): HomeFragment {
+        Timber.tag("BlueLzy").e("Fragment of $position is not found")
+        return HomeFragment()
+    }
 }

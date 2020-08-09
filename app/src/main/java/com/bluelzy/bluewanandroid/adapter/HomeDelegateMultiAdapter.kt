@@ -1,5 +1,6 @@
 package com.bluelzy.bluewanandroid.adapter
 
+import androidx.core.text.HtmlCompat
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.model.Article
 import com.bluelzy.bluewanandroid.utils.whatIfStringNotNullOrEmpty
@@ -14,7 +15,8 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
  *   @date   : 2020/05/17
  *   @desc   : Dashboard Multi Item Type Adapter
  */
-class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolder>(), LoadMoreModule {
+class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolder>(),
+    LoadMoreModule {
 
     init {
         setMultiTypeDelegate(object : BaseMultiTypeDelegate<Article>() {
@@ -37,7 +39,7 @@ class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolde
 
     private fun setupArticleType(holder: BaseViewHolder, item: Article) {
         with(holder) {
-            setText(R.id.tv_article_title, item.title)
+            setText(R.id.tv_article_title, HtmlCompat.fromHtml(item.title, 0))
             item.author.whatIfStringNotNullOrEmpty({ author ->
                 setText(
                     R.id.tv_article_share_user,

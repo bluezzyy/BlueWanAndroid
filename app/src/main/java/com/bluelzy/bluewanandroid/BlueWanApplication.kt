@@ -4,6 +4,7 @@ import android.app.Application
 import com.bluelzy.bluewanandroid.di.networkModule
 import com.bluelzy.bluewanandroid.di.repositoryModule
 import com.bluelzy.bluewanandroid.di.viewModelModule
+import com.bluelzy.bluewanandroid.repository.SharedPreferencesRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
@@ -25,6 +26,8 @@ class BlueWanApplication : Application() {
             modules(viewModelModule)
             modules(repositoryModule)
         }
+
+        SharedPreferencesRepository.init(this)
 
         if (BuildConfig.DEBUG) {
             // logging

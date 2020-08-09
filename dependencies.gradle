@@ -10,17 +10,17 @@ ext.versions = [
         versionPlugin       : '0.28.0',
 
         // kotlin
-        kotlin              : '1.3.61',
+        kotlin              : '1.3.71',
 
         // support library
         materialVersion     : '1.2.0-alpha06',
         constraintVersion   : '1.1.3',
 
         // architecture components
-        coreKtxVersion      : '1.2.0',
+        coreKtxVersion      : '1.3.1',
         appCompatVersion    : '1.1.0',
-        navigationVersion   : '2.2.2',
-        fragmentKtxVersion  : '2.2.2',
+        navigationVersion   : '2.3.0',
+        fragmentKtxVersion  : '2.3.0',
         archCompomentVersion: '2.0.0',
         lifecycleVersion    : '2.2.0',
         roomVersion         : '2.2.4',

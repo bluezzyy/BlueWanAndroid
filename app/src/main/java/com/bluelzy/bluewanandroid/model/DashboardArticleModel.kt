@@ -1,7 +1,6 @@
 package com.bluelzy.bluewanandroid.model
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 /**
  *   @author    BlueLzy
@@ -12,12 +11,12 @@ import java.io.Serializable
  */
 
 data class DashboardArticleModel(
-    val data: Data? = null,
+    @SerializedName("data") val articleData: ArticleData? = null,
     val errorCode: Int = 0,
     val errorMsg: String? = null
 )
 
-data class Data(
+data class ArticleData(
     val curPage: Int,
     @SerializedName("datas") val articles: List<Article>,
     val offset: Int,

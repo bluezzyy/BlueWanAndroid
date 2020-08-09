@@ -64,6 +64,7 @@ class ArticleDetailActivity : BaseDataBindingActivity() {
                 || url.startsWith("tbopen://")//淘宝
                 || url.startsWith("openapp.jdmobile://")//淘宝
                 || url.startsWith("tmast://") // 淘宝
+                || url.startsWith("jianshu") // 简书
             ) {
                 return true
             }

@@ -14,6 +14,10 @@ import org.koin.android.viewmodel.ext.android.getViewModel
 
 class ProjectFragment : BaseDataBindingFragment() {
 
+    override fun initViewModel() = Unit
+
+    override fun initView() = Unit
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

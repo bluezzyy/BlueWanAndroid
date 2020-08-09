@@ -12,10 +12,18 @@ import com.bluelzy.bluewanandroid.view.main.viewmodel.HomeViewModel
 import org.koin.android.viewmodel.ext.android.getViewModel
 import org.koin.core.KoinComponent
 
+/**
+ *   @author    BlueLzy
+ *   @email     bluehobert@gmail.com
+ *   @date      2020/4/8
+ *   @desc
+ */
+
 class HomeFragment : BaseDataBindingFragment(), KoinComponent {
 
-    private lateinit var viewModel: HomeViewModel
-    private lateinit var adapter: HomeDelegateMultiAdapter
+    override fun initViewModel() = Unit
+
+    override fun initView() = Unit
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,11 +33,9 @@ class HomeFragment : BaseDataBindingFragment(), KoinComponent {
         .apply {
             lifecycleOwner = this@HomeFragment
             viewModel = getViewModel<HomeViewModel>().apply {
-                this@HomeFragment.viewModel = this
                 fetchArticles()
             }
             adapter = HomeDelegateMultiAdapter().apply {
-                this@HomeFragment.adapter = this
                 loadMoreModule.setOnLoadMoreListener {
                     (viewModel as HomeViewModel).fetchArticles()
                 }
