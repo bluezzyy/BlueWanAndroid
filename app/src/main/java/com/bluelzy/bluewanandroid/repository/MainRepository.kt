@@ -68,4 +68,28 @@ class MainRepository constructor(
         }
         liveData.apply { this.postValue(json) }
     }
+
+    suspend fun loadCategoryArticles(
+        cid: Int,
+        page: Int,
+        error: (String) -> Unit
+    ) = withContext(Dispatchers.IO) {
+        val liveData = MutableLiveData<DashboardArticleModel>()
+        var articles = DashboardArticleModel()
+        isLoading = true
+        mainClient.fetchKnowledgeCategoryArticles(cid, page) { response ->
+            isLoading = false
+            when (response) {
+                is ApiResponse.Success -> {
+                    response.data?.let {
+                        articles = it
+                        liveData.postValue(it)
+                    }
+                }
+                is ApiResponse.Failure.Error -> error(response.message())
+                is ApiResponse.Failure.Exception -> error(response.message())
+            }
+        }
+        liveData.apply { this.postValue(articles) }
+    }
 }

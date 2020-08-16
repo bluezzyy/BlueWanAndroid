@@ -24,6 +24,9 @@
 
         <activity android:name=".view.detail.ui.ArticleDetailActivity">
         </activity>
+
+        <activity android:name=".view.detail.ui.GeneralActivity">
+        </activity>
     </application>
 
 </manifest>

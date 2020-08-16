@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
  *   @date      2020/4/6
  *   @desc
  */
-abstract class BaseDataBindingFragment : Fragment() {
+abstract class BaseDataBindingFragment : Fragment(), FragmentInitListener {
 
     protected inline fun <reified T : ViewDataBinding> binding(
         inflater: LayoutInflater,
@@ -23,14 +23,20 @@ abstract class BaseDataBindingFragment : Fragment() {
         container: ViewGroup?
     ): T = DataBindingUtil.inflate(inflater, resId, container, false)
 
-    abstract fun initViewModel()
-
-    abstract fun initView()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar()
         initView()
         initViewModel()
+        initData()
     }
+
+    override fun initToolbar() = Unit
+
+    override fun initView() = Unit
+
+    override fun initViewModel() = Unit
+
+    override fun initData() = Unit
 
 }

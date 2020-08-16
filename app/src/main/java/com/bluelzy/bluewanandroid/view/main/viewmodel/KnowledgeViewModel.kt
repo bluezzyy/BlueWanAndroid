@@ -39,10 +39,12 @@ class KnowledgeViewModel(private val mainRepository: MainRepository) : LiveCorou
     private fun initKnowledgeJson() {
         val lastUpdateTime = SharedPreferencesRepository.getKnowledgeUpdateTime()
         val currentTime = System.currentTimeMillis()
-        if (currentTime - lastUpdateTime > UPDATE_PERIOD) {
+        if (currentTime - lastUpdateTime > UPDATE_PERIOD || SharedPreferencesRepository.getKnowledgeJsonData().isEmpty()) {
+            Timber.tag("BlueLzy").d("get knowledge from network")
             SharedPreferencesRepository.setKnowledgeUpdateTime(currentTime)
             getNetworkJson()
         } else {
+            Timber.tag("BlueLzy").d("get knowledge from local")
             getLocalJsonFile()
         }
     }

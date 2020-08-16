@@ -11,12 +11,23 @@ import com.bluelzy.bluewanandroid.model.KnowledgeModel
  */
 class MainClient(private val blueWanAndroidService: BlueWanAndroidService) {
 
-    fun fetchDashboardArticles(page: Int, onResult: (response: ApiResponse<DashboardArticleModel>) -> Unit) {
+    fun fetchDashboardArticles(
+        page: Int,
+        onResult: (response: ApiResponse<DashboardArticleModel>) -> Unit
+    ) {
         this.blueWanAndroidService.fetchDashboardArticles(page).transform(onResult)
     }
 
     fun fetchKnowledgeJson(onResult: (response: ApiResponse<KnowledgeModel>) -> Unit) {
         this.blueWanAndroidService.fetchKnowledgeJson().transform(onResult)
+    }
+
+    fun fetchKnowledgeCategoryArticles(
+        cid: Int,
+        page: Int,
+        onResult: (response: ApiResponse<DashboardArticleModel>) -> Unit
+    ) {
+        this.blueWanAndroidService.fetchKnowledgeCategoryArticles(page, cid).transform(onResult)
     }
 
 }

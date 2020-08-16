@@ -17,6 +17,7 @@ import com.bluelzy.bluewanandroid.databinding.ActivityArticleDetailBinding
 import com.bluelzy.bluewanandroid.extensions.applyMaterialTransform
 import com.bluelzy.bluewanandroid.model.Article
 import com.bluelzy.bluewanandroid.utils.whatIfNull
+import com.bluelzy.bluewanandroid.widget.AppbarController
 
 /**
  *   @author : BlueLzy
@@ -27,17 +28,16 @@ import com.bluelzy.bluewanandroid.utils.whatIfNull
 class ArticleDetailActivity : BaseDataBindingActivity() {
 
     private val binding: ActivityArticleDetailBinding by binding(R.layout.activity_article_detail)
+    private lateinit var toolbarTitle : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         intent.getStringExtra(KEY_ARTICLE_TITLE).whatIfNull { DEFAULT_TITLE }
             .let { title ->
                 applyMaterialTransform(title)
-                binding.apply {
-                    this.title = title
-                    this.activity = this@ArticleDetailActivity
-                }
+                toolbarTitle = title
             }
+        initToolbar()
         initWebView()
     }
 
@@ -70,6 +70,15 @@ class ArticleDetailActivity : BaseDataBindingActivity() {
             }
 
             return super.shouldOverrideUrlLoading(view, request)
+        }
+    }
+
+    private fun initToolbar() {
+        with(binding.toolbar) {
+            AppbarController.Builder()
+                .init(this@ArticleDetailActivity, this)
+                .setTitle(toolbarTitle)
+                .build()
         }
     }
 

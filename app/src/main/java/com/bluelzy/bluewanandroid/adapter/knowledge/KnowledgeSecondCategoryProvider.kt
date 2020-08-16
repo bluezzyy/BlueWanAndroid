@@ -4,6 +4,7 @@ import android.view.View
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.adapter.KnowledgeDelegateMultiAdapter.Companion.VIEW_TYPE_SECOND_CATEGORY
 import com.bluelzy.bluewanandroid.model.KnowledgeChildren
+import com.bluelzy.bluewanandroid.view.detail.ui.GeneralActivity
 import com.chad.library.adapter.base.entity.node.BaseNode
 import com.chad.library.adapter.base.provider.BaseNodeProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -29,6 +30,6 @@ class KnowledgeSecondCategoryProvider : BaseNodeProvider() {
 
     override fun onClick(helper: BaseViewHolder, view: View, data: BaseNode, position: Int) {
         super.onClick(helper, view, data, position)
-        // TODO: goto category list page
+        GeneralActivity.newInstance(context, (data as KnowledgeChildren).id, data.name)
     }
 }

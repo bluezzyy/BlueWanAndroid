@@ -1,6 +1,7 @@
 package com.bluelzy.bluewanandroid.view.main.ui
 
 import android.os.Bundle
+import android.view.View
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.base.BaseDataBindingActivity
 import com.bluelzy.bluewanandroid.databinding.ActivityMainBinding
@@ -19,5 +20,13 @@ class MainActivity : BaseDataBindingActivity() {
             pagerAdapter = MainPagerAdapter(supportFragmentManager)
             navigation = mainBottomNavigation
         }
+    }
+
+    fun showSpinner() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideSpinner() {
+        binding.progressBar.visibility = View.GONE
     }
 }

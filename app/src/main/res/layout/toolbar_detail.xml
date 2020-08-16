@@ -1,43 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
 
-    <data>
-
-        <variable
-            name="title"
-            type="String" />
-
-        <variable
-            name="activity"
-            type="com.bluelzy.bluewanandroid.view.detail.ui.ArticleDetailActivity" />
-    </data>
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        android:padding="6dp"
+        android:src="@drawable/ic_back_arrow" />
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> activity.onBackPressed()}"
-            android:padding="6dp"
-            android:src="@drawable/ic_back_arrow" />
+    <!-- Since Toolbar can not easily change the UI -->
+    <!-- I prefer to use a TextView rather than Toolbar-Title -->
+    <TextView
+        android:id="@+id/tv_toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
-        <!-- Since Toolbar can not easily change the UI -->
-        <!-- I prefer to use a TextView rather than Toolbar-Title -->
-        <TextView
-            android:id="@+id/tv_toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{title}"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-    </com.google.android.material.appbar.MaterialToolbar>
-</layout>
+</com.google.android.material.appbar.MaterialToolbar>

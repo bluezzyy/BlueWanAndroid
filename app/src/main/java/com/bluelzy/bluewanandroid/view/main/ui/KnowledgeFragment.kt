@@ -25,7 +25,7 @@ import org.koin.android.viewmodel.ext.android.getViewModel
  *   @author    BlueLzy
  *   @email     bluehobert@gmail.com
  *   @date      2020/4/8
- *   @desc
+ *   @desc      MainActivity -> KnowledgeFragment
  */
 
 class KnowledgeFragment : BaseDataBindingFragment() {

@@ -5,6 +5,7 @@ import com.bluelzy.bluewanandroid.model.KnowledgeModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  *   @author    BlueLzy
@@ -19,5 +20,8 @@ interface BlueWanAndroidService {
 
     @GET("tree/json")
     fun fetchKnowledgeJson(): Call<KnowledgeModel>
+
+    @GET("article/list/{page}/json")
+    fun fetchKnowledgeCategoryArticles( @Path("page") page: Int, @Query("cid") cid: Int): Call<DashboardArticleModel>
 
 }

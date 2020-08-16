@@ -13,7 +13,7 @@ import com.chad.library.adapter.base.entity.node.BaseNode
  *   @date      2020/8/8
  *   @desc
  */
-class KnowledgeDelegateMultiAdapter : BaseNodeAdapter() {
+class KnowledgeDelegateMultiAdapter() : BaseNodeAdapter() {
 
     init {
         addFullSpanNodeProvider(KnowledgeFirstCategoryProvider())
@@ -32,4 +32,5 @@ class KnowledgeDelegateMultiAdapter : BaseNodeAdapter() {
         const val VIEW_TYPE_FIRST_CATEGORY = 0
         const val VIEW_TYPE_SECOND_CATEGORY = 1
     }
+
 }

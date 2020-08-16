@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.adapter.HomeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.base.BaseDataBindingFragment
@@ -21,9 +22,7 @@ import org.koin.core.KoinComponent
 
 class HomeFragment : BaseDataBindingFragment(), KoinComponent {
 
-    override fun initViewModel() = Unit
-
-    override fun initView() = Unit
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +32,10 @@ class HomeFragment : BaseDataBindingFragment(), KoinComponent {
         .apply {
             lifecycleOwner = this@HomeFragment
             viewModel = getViewModel<HomeViewModel>().apply {
+                (activity as MainActivity).showSpinner()
                 fetchArticles()
+            }.also {
+                this@HomeFragment.viewModel = it
             }
             adapter = HomeDelegateMultiAdapter().apply {
                 loadMoreModule.setOnLoadMoreListener {
@@ -41,5 +43,12 @@ class HomeFragment : BaseDataBindingFragment(), KoinComponent {
                 }
             }
         }.root
+
+    override fun initViewModel() {
+        super.initViewModel()
+        viewModel.articleLiveData.observe(this, Observer {
+            (activity as MainActivity).hideSpinner()
+        })
+    }
 
 }
