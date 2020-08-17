@@ -2,6 +2,7 @@ package com.bluelzy.bluewanandroid.network
 
 import com.bluelzy.bluewanandroid.model.DashboardArticleModel
 import com.bluelzy.bluewanandroid.model.KnowledgeModel
+import com.bluelzy.bluewanandroid.model.ProjectModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -23,5 +24,8 @@ interface BlueWanAndroidService {
 
     @GET("article/list/{page}/json")
     fun fetchKnowledgeCategoryArticles( @Path("page") page: Int, @Query("cid") cid: Int): Call<DashboardArticleModel>
+
+    @GET("project/tree/json")
+    fun fetchProjectJson(): Call<ProjectModel>
 
 }

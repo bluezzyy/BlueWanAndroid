@@ -45,7 +45,6 @@ class HomeFragment : BaseDataBindingFragment(), KoinComponent {
         }.root
 
     override fun initViewModel() {
-        super.initViewModel()
         viewModel.articleLiveData.observe(this, Observer {
             (activity as MainActivity).hideSpinner()
         })

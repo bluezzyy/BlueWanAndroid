@@ -3,6 +3,7 @@ package com.bluelzy.bluewanandroid.repository
 import androidx.lifecycle.MutableLiveData
 import com.bluelzy.bluewanandroid.model.DashboardArticleModel
 import com.bluelzy.bluewanandroid.model.KnowledgeModel
+import com.bluelzy.bluewanandroid.model.ProjectModel
 import com.bluelzy.bluewanandroid.network.ApiResponse
 import com.bluelzy.bluewanandroid.network.MainClient
 import com.bluelzy.bluewanandroid.network.message
@@ -92,4 +93,26 @@ class MainRepository constructor(
         }
         liveData.apply { this.postValue(articles) }
     }
+
+    suspend fun loadProjectJson(error: (String) -> Unit) = withContext(Dispatchers.IO) {
+        val liveData = MutableLiveData<ProjectModel>()
+        var json = ProjectModel()
+        isLoading = true
+        mainClient.fetchProjectJson { response ->
+            isLoading = false
+            when (response) {
+                is ApiResponse.Success -> {
+                    response.data?.let {
+                        json = it
+                        liveData.postValue(it)
+                    }
+                }
+                is ApiResponse.Failure.Error -> error(response.message())
+                is ApiResponse.Failure.Exception -> error(response.message())
+            }
+        }
+        liveData.apply { this.postValue(json) }
+    }
+
+
 }

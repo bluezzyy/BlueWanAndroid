@@ -2,6 +2,7 @@ package com.bluelzy.bluewanandroid.network
 
 import com.bluelzy.bluewanandroid.model.DashboardArticleModel
 import com.bluelzy.bluewanandroid.model.KnowledgeModel
+import com.bluelzy.bluewanandroid.model.ProjectModel
 
 /**
  *   @author    BlueLzy
@@ -28,6 +29,10 @@ class MainClient(private val blueWanAndroidService: BlueWanAndroidService) {
         onResult: (response: ApiResponse<DashboardArticleModel>) -> Unit
     ) {
         this.blueWanAndroidService.fetchKnowledgeCategoryArticles(page, cid).transform(onResult)
+    }
+
+    fun fetchProjectJson(onResult: (response: ApiResponse<ProjectModel>) -> Unit) {
+        this.blueWanAndroidService.fetchProjectJson().transform(onResult)
     }
 
 }
