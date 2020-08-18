@@ -4,16 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.base.BaseDataBindingFragment
 import com.bluelzy.bluewanandroid.databinding.FragmentProjectBinding
+import com.bluelzy.bluewanandroid.view.main.adapter.project.ProjectDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.view.main.viewmodel.ProjectViewModel
-import com.bluelzy.bluewanandroid.widget.AppbarController
+import kotlinx.android.synthetic.main.toolbar_home.view.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 class ProjectFragment : BaseDataBindingFragment() {
 
     private lateinit var binding: FragmentProjectBinding
+    private lateinit var viewModel: ProjectViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,16 +27,24 @@ class ProjectFragment : BaseDataBindingFragment() {
             lifecycleOwner = this@ProjectFragment
             this@ProjectFragment.binding = this
 
-            viewModel = getViewModel<ProjectViewModel>().apply { fetchProjectJson() }
+            viewModel = getViewModel<ProjectViewModel>()
+                .apply {
+                    (activity as MainActivity).showSpinner()
+                    fetchProjectJson()
+                }
+                .also { this@ProjectFragment.viewModel = it }
+
+            adapter = ProjectDelegateMultiAdapter()
         }.root
 
-    override fun initToolbar() = with(binding.layoutToolbar) {
-        AppbarController.Builder()
-            .init(activity, this)
-            .setTitle(context.getString(R.string.title_project))
-            .build()
-        Unit
+
+    override fun initView() {
+        binding.layoutToolbar.toolbar_title.text = "项目"
     }
 
-
+    override fun initViewModel() {
+        viewModel.projectLiveData.observe(this, Observer {
+            (activity as MainActivity).hideSpinner()
+        })
+    }
 }

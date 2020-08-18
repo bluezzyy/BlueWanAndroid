@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.bluelzy.bluewanandroid.R
-import com.bluelzy.bluewanandroid.adapter.HomeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.base.BaseDataBindingFragment
 import com.bluelzy.bluewanandroid.databinding.FragmentCategoryBinding
 import com.bluelzy.bluewanandroid.view.category.viewmodel.CategoryViewModel
 import com.bluelzy.bluewanandroid.view.detail.ui.GeneralActivity
+import com.bluelzy.bluewanandroid.view.main.adapter.home.HomeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.widget.AppbarController
 import org.koin.android.viewmodel.ext.android.getViewModel
 

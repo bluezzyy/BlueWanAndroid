@@ -1,12 +1,17 @@
 package com.bluelzy.bluewanandroid.model
 
+import com.google.gson.annotations.SerializedName
+
 /**
  *   @author    BlueLzy
  *   @email     bluehobert@gmail.com
  *   @date      2020/8/17
  *   @desc
  */
-class ProjectModel : ArrayList<ProjectModelItem>()
+data class ProjectModel(@SerializedName("data") val projectList: List<ProjectModelItem>? = null,
+                   val errorCode: Int = 0,
+                   val errorMsg: String? = null)
+
 
 data class ProjectModelItem(
     val children: List<Any>,

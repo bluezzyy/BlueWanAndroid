@@ -1,4 +1,4 @@
-package com.bluelzy.bluewanandroid.adapter
+package com.bluelzy.bluewanandroid.view.main.adapter.home
 
 import androidx.core.text.HtmlCompat
 import com.bluelzy.bluewanandroid.R

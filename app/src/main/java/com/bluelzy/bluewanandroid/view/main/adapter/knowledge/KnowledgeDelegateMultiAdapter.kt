@@ -1,7 +1,5 @@
-package com.bluelzy.bluewanandroid.adapter
+package com.bluelzy.bluewanandroid.view.main.adapter.knowledge
 
-import com.bluelzy.bluewanandroid.adapter.knowledge.KnowledgeFirstCategoryProvider
-import com.bluelzy.bluewanandroid.adapter.knowledge.KnowledgeSecondCategoryProvider
 import com.bluelzy.bluewanandroid.model.KnowledgeChildren
 import com.bluelzy.bluewanandroid.model.KnowledgeData
 import com.chad.library.adapter.base.BaseNodeAdapter
@@ -13,7 +11,7 @@ import com.chad.library.adapter.base.entity.node.BaseNode
  *   @date      2020/8/8
  *   @desc
  */
-class KnowledgeDelegateMultiAdapter() : BaseNodeAdapter() {
+class KnowledgeDelegateMultiAdapter : BaseNodeAdapter() {
 
     init {
         addFullSpanNodeProvider(KnowledgeFirstCategoryProvider())

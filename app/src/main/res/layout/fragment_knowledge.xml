@@ -10,7 +10,7 @@
 
         <variable
             name="adapter"
-            type="com.bluelzy.bluewanandroid.adapter.KnowledgeDelegateMultiAdapter" />
+            type="com.bluelzy.bluewanandroid.view.main.adapter.knowledge.KnowledgeDelegateMultiAdapter" />
 
     </data>
 
@@ -24,7 +24,7 @@
             layout="@layout/toolbar_home" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_home_list"
+            android:id="@+id/rv_knowledge_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:adapter="@{adapter}"

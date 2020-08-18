@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bluelzy.bluewanandroid.R
-import com.bluelzy.bluewanandroid.adapter.KnowledgeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.base.BaseDataBindingFragment
 import com.bluelzy.bluewanandroid.databinding.FragmentKnowledgeBinding
 import com.bluelzy.bluewanandroid.model.KnowledgeChildren
@@ -15,6 +14,7 @@ import com.bluelzy.bluewanandroid.model.KnowledgeData
 import com.bluelzy.bluewanandroid.model.KnowledgeModel
 import com.bluelzy.bluewanandroid.repository.SharedPreferencesRepository
 import com.bluelzy.bluewanandroid.utils.LocalJsonUtils
+import com.bluelzy.bluewanandroid.view.main.adapter.knowledge.KnowledgeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.view.main.viewmodel.KnowledgeViewModel
 import com.chad.library.adapter.base.entity.node.BaseNode
 import com.google.gson.Gson
@@ -51,7 +51,7 @@ class KnowledgeFragment : BaseDataBindingFragment() {
 
     override fun initView() {
         binding.layoutToolbar.toolbar_title.text = "知识体系"
-        binding.rvHomeList.layoutManager = GridLayoutManager(context, 3)
+        binding.rvKnowledgeList.layoutManager = GridLayoutManager(context, 3)
             .also { grid ->
                 grid.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {

@@ -11,7 +11,7 @@
 
         <variable
             name="adapter"
-            type="com.bluelzy.bluewanandroid.adapter.HomeDelegateMultiAdapter" />
+            type="com.bluelzy.bluewanandroid.view.main.adapter.home.HomeDelegateMultiAdapter" />
 
     </data>
 

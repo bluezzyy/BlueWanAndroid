@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.bluelzy.bluewanandroid.R
-import com.bluelzy.bluewanandroid.adapter.HomeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.base.BaseDataBindingFragment
 import com.bluelzy.bluewanandroid.databinding.FragmentHomeBinding
+import com.bluelzy.bluewanandroid.view.main.adapter.home.HomeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.view.main.viewmodel.HomeViewModel
 import org.koin.android.viewmodel.ext.android.getViewModel
 import org.koin.core.KoinComponent

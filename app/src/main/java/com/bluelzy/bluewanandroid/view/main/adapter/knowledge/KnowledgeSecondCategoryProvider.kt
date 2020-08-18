@@ -1,10 +1,10 @@
-package com.bluelzy.bluewanandroid.adapter.knowledge
+package com.bluelzy.bluewanandroid.view.main.adapter.knowledge
 
 import android.view.View
 import com.bluelzy.bluewanandroid.R
-import com.bluelzy.bluewanandroid.adapter.KnowledgeDelegateMultiAdapter.Companion.VIEW_TYPE_SECOND_CATEGORY
 import com.bluelzy.bluewanandroid.model.KnowledgeChildren
 import com.bluelzy.bluewanandroid.view.detail.ui.GeneralActivity
+import com.bluelzy.bluewanandroid.view.main.adapter.knowledge.KnowledgeDelegateMultiAdapter.Companion.VIEW_TYPE_SECOND_CATEGORY
 import com.chad.library.adapter.base.entity.node.BaseNode
 import com.chad.library.adapter.base.provider.BaseNodeProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder

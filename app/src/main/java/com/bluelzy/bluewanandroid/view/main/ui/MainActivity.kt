@@ -17,7 +17,9 @@ class MainActivity : BaseDataBindingActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         binding.apply {
-            pagerAdapter = MainPagerAdapter(supportFragmentManager)
+            pagerAdapter = MainPagerAdapter(
+                supportFragmentManager
+            )
             navigation = mainBottomNavigation
         }
     }
