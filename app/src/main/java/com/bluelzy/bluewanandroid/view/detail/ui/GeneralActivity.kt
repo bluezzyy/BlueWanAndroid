@@ -23,20 +23,25 @@ class GeneralActivity : BaseDataBindingActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        intent.getStringExtra(KEY_KNOWLEDGE_TITLE).whatIfNull { DEFAULT_TITLE }
-            .let { title ->
-                showSpinner()
-                addCategoryFragment(title)
-            }
+        val title = intent.getStringExtra(KEY_KNOWLEDGE_TITLE).whatIfNull { DEFAULT_TITLE }
+        when (intent.getSerializableExtra(KEY_ACTIVITY_TYPE)) {
+            ActivityType.ACTIVITY_KNOWLEDGE -> addCategoryFragment(title)
+            ActivityType.ACTIVITY_PROJECT -> addProjectListFragment()
+        }
     }
 
     private fun addCategoryFragment(title: String) {
+        showSpinner()
         FragmentNavigation.addFragment(
             this,
             CategoryFragment(intent.getIntExtra(KEY_KNOWLEDGE_CID, 0), title)
         )
     }
 
+    // TODO: 添加Project Item List Fragment
+    private fun addProjectListFragment() {
+
+    }
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount == 1) {
             finish()
@@ -53,15 +58,27 @@ class GeneralActivity : BaseDataBindingActivity() {
         binding.progressBar.visibility = View.GONE
     }
 
+    enum class ActivityType {
+        ACTIVITY_KNOWLEDGE,
+        ACTIVITY_PROJECT
+    }
+
     companion object {
 
+        private const val KEY_ACTIVITY_TYPE = "activityType"
         private const val DEFAULT_TITLE = "知识体系"
         private const val KEY_KNOWLEDGE_TITLE = "KnowledgeTitle"
         private const val KEY_KNOWLEDGE_CID = "knowledgeCid"
 
         @JvmStatic
-        fun newInstance(context: Context?, cid: Int, title: String) {
+        fun newInstance(
+            activityType: ActivityType,
+            context: Context?,
+            cid: Int = 0,
+            title: String = "WanAndroid"
+        ) {
             val intent = Intent(context, GeneralActivity::class.java).run {
+                putExtra(KEY_ACTIVITY_TYPE, activityType)
                 putExtra(KEY_KNOWLEDGE_CID, cid)
                 putExtra(KEY_KNOWLEDGE_TITLE, title)
             }

@@ -43,7 +43,7 @@ ext.versions = [
         rxJavaVersion       : '3.0.0',
 
         // glide
-        glideVersion        : '4.9.0',
+        glideVersion        : '4.11.0',
         glidePaletteVersion : '2.1.2',
 
         // debugging

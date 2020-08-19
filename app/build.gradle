@@ -87,5 +87,10 @@ dependencies {
     // debugging
     implementation "com.jakewharton.timber:timber:$versions.timberVersion"
 
+    // Glide
+    implementation ("com.github.bumptech.glide:glide:$versions.glideVersion") {
+        exclude group: "com.android.support"
+    }
+
 
 }

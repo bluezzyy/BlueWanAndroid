@@ -52,7 +52,7 @@ data class Article(
     val shareUser: String,
     val superChapterId: Int,
     val superChapterName: String,
-    val tags: List<Tag>,
+    val tags: List<ArticleTag>,
     val title: String,
     val type: Int,
     val userId: Int,
@@ -60,7 +60,7 @@ data class Article(
     val zan: Int
 )
 
-data class Tag(
+data class ArticleTag(
     val name: String,
     val url: String
 )
