@@ -17,7 +17,7 @@ class HomeViewModel constructor(
     var articleLiveData: LiveData<DashboardArticleModel>
     var toastLiveData: MutableLiveData<String> = MutableLiveData()
 
-    var page: Int = 0
+    private var page: Int = 0
 
     init {
         Timber.d("injection HomeViewModel")

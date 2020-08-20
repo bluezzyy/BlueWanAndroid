@@ -30,6 +30,6 @@ class KnowledgeSecondCategoryProvider : BaseNodeProvider() {
 
     override fun onClick(helper: BaseViewHolder, view: View, data: BaseNode, position: Int) {
         super.onClick(helper, view, data, position)
-        GeneralActivity.newInstance(context, (data as KnowledgeChildren).id, data.name)
+        GeneralActivity.newInstance(GeneralActivity.ActivityType.ACTIVITY_KNOWLEDGE, context, (data as KnowledgeChildren).id, data.name)
     }
 }

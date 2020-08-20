@@ -38,7 +38,7 @@ class CategoryFragment(private val cid: Int, private val toolbarTitle: String) :
                 .also { this@CategoryFragment.viewModel = it }
             adapter = HomeDelegateMultiAdapter().apply {
                 loadMoreModule.setOnLoadMoreListener {
-                    (viewModel as CategoryViewModel).fetchArticles()
+                    (viewModel as CategoryViewModel).fetchArticles(cid)
                 }
             }
         }.root
@@ -58,8 +58,5 @@ class CategoryFragment(private val cid: Int, private val toolbarTitle: String) :
         })
     }
 
-    override fun initData() {
-        viewModel.cid = cid
-        viewModel.fetchArticles()
-    }
+    override fun initData() = viewModel.fetchArticles(cid)
 }

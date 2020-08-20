@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
  *   @desc
  */
 data class ProjectItemModel(
-    @SerializedName("data") val projectItem: ProjectItemData
+    @SerializedName("data") val projectItem: ProjectItemData? = null
 )
 
 data class ProjectItemData(

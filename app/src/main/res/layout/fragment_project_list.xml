@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.bluelzy.bluewanandroid.view.projectlist.viewmodel.ProjectListViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.bluelzy.bluewanandroid.view.main.adapter.project.ProjectListDelegateAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/layout_toolbar"
+            layout="@layout/toolbar_detail" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_project_item_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:adapter="@{adapter}"
+            app:adapterProjectItemList="@{viewModel.projectListLiveData.projectItem.projects}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_toolbar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

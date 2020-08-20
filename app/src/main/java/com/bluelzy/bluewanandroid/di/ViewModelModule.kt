@@ -4,6 +4,7 @@ import com.bluelzy.bluewanandroid.view.category.viewmodel.CategoryViewModel
 import com.bluelzy.bluewanandroid.view.main.viewmodel.HomeViewModel
 import com.bluelzy.bluewanandroid.view.main.viewmodel.KnowledgeViewModel
 import com.bluelzy.bluewanandroid.view.main.viewmodel.ProjectViewModel
+import com.bluelzy.bluewanandroid.view.projectlist.viewmodel.ProjectListViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -19,5 +20,6 @@ val viewModelModule = module {
     viewModel { KnowledgeViewModel(get()) }
     viewModel { ProjectViewModel(get()) }
     viewModel { CategoryViewModel(get()) }
+    viewModel { ProjectListViewModel(get()) }
 
 }

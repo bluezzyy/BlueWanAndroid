@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.NonNull
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.base.BaseDataBindingActivity
 import com.bluelzy.bluewanandroid.databinding.ActivityGeneralDetailBinding
 import com.bluelzy.bluewanandroid.extensions.FragmentNavigation
 import com.bluelzy.bluewanandroid.utils.whatIfNull
 import com.bluelzy.bluewanandroid.view.category.ui.CategoryFragment
+import com.bluelzy.bluewanandroid.view.projectlist.ui.ProjectListFragment
 
 /**
  *   @author    BlueLzy
@@ -23,25 +25,30 @@ class GeneralActivity : BaseDataBindingActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val title = intent.getStringExtra(KEY_KNOWLEDGE_TITLE).whatIfNull { DEFAULT_TITLE }
+        val title = intent.getStringExtra(KEY_PAGE_TITLE).whatIfNull { DEFAULT_TITLE }
+        val cid = intent.getIntExtra(KEY_PAGE_CID, 0)
         when (intent.getSerializableExtra(KEY_ACTIVITY_TYPE)) {
-            ActivityType.ACTIVITY_KNOWLEDGE -> addCategoryFragment(title)
-            ActivityType.ACTIVITY_PROJECT -> addProjectListFragment()
+            ActivityType.ACTIVITY_KNOWLEDGE -> addCategoryFragment(cid, title)
+            ActivityType.ACTIVITY_PROJECT -> addProjectListFragment(cid, title)
         }
     }
 
-    private fun addCategoryFragment(title: String) {
+    private fun addCategoryFragment(cid: Int, title: String) {
         showSpinner()
         FragmentNavigation.addFragment(
             this,
-            CategoryFragment(intent.getIntExtra(KEY_KNOWLEDGE_CID, 0), title)
+            CategoryFragment(cid, title)
         )
     }
 
-    // TODO: 添加Project Item List Fragment
-    private fun addProjectListFragment() {
-
+    private fun addProjectListFragment(cid: Int, title: String) {
+        showSpinner()
+        FragmentNavigation.addFragment(
+            this,
+            ProjectListFragment(cid, title)
+        )
     }
+
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount == 1) {
             finish()
@@ -64,23 +71,22 @@ class GeneralActivity : BaseDataBindingActivity() {
     }
 
     companion object {
-
         private const val KEY_ACTIVITY_TYPE = "activityType"
-        private const val DEFAULT_TITLE = "知识体系"
-        private const val KEY_KNOWLEDGE_TITLE = "KnowledgeTitle"
-        private const val KEY_KNOWLEDGE_CID = "knowledgeCid"
+        private const val DEFAULT_TITLE = "Blue玩安卓"
+        private const val KEY_PAGE_TITLE = "PageTitle"
+        private const val KEY_PAGE_CID = "PageCid"
 
         @JvmStatic
         fun newInstance(
-            activityType: ActivityType,
+            @NonNull activityType: ActivityType,
             context: Context?,
             cid: Int = 0,
-            title: String = "WanAndroid"
+            title: String = DEFAULT_TITLE
         ) {
             val intent = Intent(context, GeneralActivity::class.java).run {
                 putExtra(KEY_ACTIVITY_TYPE, activityType)
-                putExtra(KEY_KNOWLEDGE_CID, cid)
-                putExtra(KEY_KNOWLEDGE_TITLE, title)
+                putExtra(KEY_PAGE_CID, cid)
+                putExtra(KEY_PAGE_TITLE, title)
             }
 
             context?.startActivity(intent)

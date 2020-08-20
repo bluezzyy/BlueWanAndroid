@@ -2,6 +2,7 @@ package com.bluelzy.bluewanandroid.network
 
 import com.bluelzy.bluewanandroid.model.DashboardArticleModel
 import com.bluelzy.bluewanandroid.model.KnowledgeModel
+import com.bluelzy.bluewanandroid.model.ProjectItemModel
 import com.bluelzy.bluewanandroid.model.ProjectModel
 
 /**
@@ -33,6 +34,10 @@ class MainClient(private val blueWanAndroidService: BlueWanAndroidService) {
 
     fun fetchProjectJson(onResult: (response: ApiResponse<ProjectModel>) -> Unit) {
         this.blueWanAndroidService.fetchProjectJson().transform(onResult)
+    }
+
+    fun fetchProjectList(page: Int, cid: Int, onResult: (response: ApiResponse<ProjectItemModel>) -> Unit) {
+        this.blueWanAndroidService.fetchProjectList(page, cid).transform(onResult)
     }
 
 }

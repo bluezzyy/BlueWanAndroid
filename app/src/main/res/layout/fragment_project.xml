@@ -32,6 +32,7 @@
             app:spanCount="2"
             app:adapterProjectList="@{viewModel.projectLiveData.projectList}"
             app:adapter="@{adapter}"
+            app:projectItemClick="@{adapter}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

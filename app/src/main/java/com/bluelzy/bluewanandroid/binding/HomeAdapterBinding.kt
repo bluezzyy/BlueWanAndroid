@@ -4,11 +4,14 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.model.Article
+import com.bluelzy.bluewanandroid.model.ProjectItem
 import com.bluelzy.bluewanandroid.model.ProjectModelItem
 import com.bluelzy.bluewanandroid.utils.whatIfNotNullOrEmpty
 import com.bluelzy.bluewanandroid.view.detail.ui.ArticleDetailActivity
+import com.bluelzy.bluewanandroid.view.detail.ui.GeneralActivity
 import com.bluelzy.bluewanandroid.view.main.adapter.home.HomeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.view.main.adapter.project.ProjectDelegateMultiAdapter
+import com.bluelzy.bluewanandroid.view.main.adapter.project.ProjectListDelegateAdapter
 import com.chad.library.adapter.base.BaseDelegateMultiAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import timber.log.Timber
@@ -54,6 +57,36 @@ fun bindAdapterArticleList(view: RecyclerView, article: List<Article>?) {
 fun bindAdapterProjectList(view: RecyclerView, article: List<ProjectModelItem>?) {
     article.whatIfNotNullOrEmpty {
         (view.adapter as? ProjectDelegateMultiAdapter)?.run {
+            addData(it)
+        }
+    }
+}
+
+@BindingAdapter("projectItemClick")
+fun bindProjectItemClick(
+    view: RecyclerView,
+    adapter: BaseDelegateMultiAdapter<ProjectModelItem, BaseViewHolder>
+) {
+    adapter.setOnItemClickListener { _, _, position ->
+        GeneralActivity.newInstance(
+            GeneralActivity.ActivityType.ACTIVITY_PROJECT,
+            view.context,
+            adapter.getItem(position).id,
+            adapter.getItem(position).name
+        )
+    }
+    adapter.setOnItemChildClickListener { _, itemView, _ ->
+        if (itemView.id == R.id.iv_favourite_article) {
+            // TODO: 添加收藏功能
+            Timber.tag("BlueLzy").d("favourite clicked...")
+        }
+    }
+}
+
+@BindingAdapter("adapterProjectItemList")
+fun bindAdapterProjectItemList(view: RecyclerView, article: List<ProjectItem>?) {
+    article.whatIfNotNullOrEmpty {
+        (view.adapter as? ProjectListDelegateAdapter)?.run {
             addData(it)
         }
     }

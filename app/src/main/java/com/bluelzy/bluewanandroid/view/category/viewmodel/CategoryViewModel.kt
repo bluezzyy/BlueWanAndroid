@@ -23,8 +23,8 @@ class CategoryViewModel constructor(
     var articleLiveData: LiveData<DashboardArticleModel>
     var toastLiveData: MutableLiveData<String> = MutableLiveData()
 
-    var page: Int = 0
-    var cid: Int = 0
+    private var page: Int = 0
+    private var cid: Int = 0
 
     init {
         Timber.d("injection CategoryViewModel")
@@ -35,5 +35,8 @@ class CategoryViewModel constructor(
         }
     }
 
-    fun fetchArticles() = this.articleFetchingLiveData.postValue(page++)
+    fun fetchArticles(cid: Int) {
+        this.cid = cid
+        this.articleFetchingLiveData.postValue(page++)
+    }
 }
