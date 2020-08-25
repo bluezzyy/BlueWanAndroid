@@ -25,6 +25,7 @@ class ProjectListFragment(private val cid: Int, private val toolbarTitle: String
 
     private lateinit var viewModel: ProjectListViewModel
     private lateinit var binding: FragmentProjectListBinding
+    private lateinit var adapter: ProjectListDelegateAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +45,7 @@ class ProjectListFragment(private val cid: Int, private val toolbarTitle: String
                     .also { this@ProjectListFragment.viewModel = it }
 
                 adapter = ProjectListDelegateAdapter().apply {
+                    this@ProjectListFragment.adapter = this
                     loadMoreModule.setOnLoadMoreListener {
                         (viewModel as ProjectListViewModel).fetchProjects(cid)
                     }
@@ -61,6 +63,9 @@ class ProjectListFragment(private val cid: Int, private val toolbarTitle: String
 
     override fun initViewModel() {
         viewModel.projectListLiveData.observe(this, Observer {
+            it.projectItem?.projects?.let {projects ->
+                if (projects.size <= 3) adapter.loadMoreModule.loadMoreEnd(true)
+            }
             (activity as GeneralActivity).hideSpinner()
         })
     }

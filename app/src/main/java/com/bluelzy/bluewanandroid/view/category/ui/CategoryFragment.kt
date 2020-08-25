@@ -25,6 +25,7 @@ class CategoryFragment(private val cid: Int, private val toolbarTitle: String) :
 
     private lateinit var viewModel: CategoryViewModel
     private lateinit var binding: FragmentCategoryBinding
+    private lateinit var adapter: HomeDelegateMultiAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +38,7 @@ class CategoryFragment(private val cid: Int, private val toolbarTitle: String) :
             viewModel = getViewModel<CategoryViewModel>()
                 .also { this@CategoryFragment.viewModel = it }
             adapter = HomeDelegateMultiAdapter().apply {
+                this@CategoryFragment.adapter = this
                 loadMoreModule.setOnLoadMoreListener {
                     (viewModel as CategoryViewModel).fetchArticles(cid)
                 }
@@ -54,6 +56,9 @@ class CategoryFragment(private val cid: Int, private val toolbarTitle: String) :
 
     override fun initViewModel() {
         viewModel.articleLiveData.observe(this, Observer {
+            it.articleData?.articles?.let { articles ->
+                if (articles.size < 3) adapter.loadMoreModule.loadMoreEnd(true)
+            }
             (activity as GeneralActivity).hideSpinner()
         })
     }

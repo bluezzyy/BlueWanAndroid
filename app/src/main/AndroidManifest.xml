@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.detail.ui.ArticleDetailActivity">
+        <activity android:name=".view.detail.ui.WebViewActivity">
         </activity>
 
         <activity android:name=".view.detail.ui.GeneralActivity">

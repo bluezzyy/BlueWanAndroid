@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:adapter="@{adapter}"
+            app:projectListItemClick="@{adapter}"
             app:adapterProjectItemList="@{viewModel.projectListLiveData.projectItem.projects}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"

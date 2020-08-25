@@ -7,8 +7,8 @@ import com.bluelzy.bluewanandroid.model.Article
 import com.bluelzy.bluewanandroid.model.ProjectItem
 import com.bluelzy.bluewanandroid.model.ProjectModelItem
 import com.bluelzy.bluewanandroid.utils.whatIfNotNullOrEmpty
-import com.bluelzy.bluewanandroid.view.detail.ui.ArticleDetailActivity
 import com.bluelzy.bluewanandroid.view.detail.ui.GeneralActivity
+import com.bluelzy.bluewanandroid.view.detail.ui.WebViewActivity
 import com.bluelzy.bluewanandroid.view.main.adapter.home.HomeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.view.main.adapter.project.ProjectDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.view.main.adapter.project.ProjectListDelegateAdapter
@@ -29,10 +29,11 @@ fun bindArticleItemClick(
     adapter: BaseDelegateMultiAdapter<Article, BaseViewHolder>
 ) {
     adapter.setOnItemClickListener { _, _, position ->
-        ArticleDetailActivity.newInstance(
+        WebViewActivity.newInstance(
             view.context,
             adapter.getViewByPosition(position, R.id.cl_item_article),
-            adapter.getItem(position)
+            adapter.getItem(position).link,
+            adapter.getItem(position).title
         )
     }
     adapter.setOnItemChildClickListener { _, itemView, _ ->
@@ -75,12 +76,6 @@ fun bindProjectItemClick(
             adapter.getItem(position).name
         )
     }
-    adapter.setOnItemChildClickListener { _, itemView, _ ->
-        if (itemView.id == R.id.iv_favourite_article) {
-            // TODO: 添加收藏功能
-            Timber.tag("BlueLzy").d("favourite clicked...")
-        }
-    }
 }
 
 @BindingAdapter("adapterProjectItemList")
@@ -92,3 +87,17 @@ fun bindAdapterProjectItemList(view: RecyclerView, article: List<ProjectItem>?) 
     }
 }
 
+@BindingAdapter("projectListItemClick")
+fun bindProjectListItemClick(
+    view: RecyclerView,
+    adapter: BaseDelegateMultiAdapter<ProjectItem, BaseViewHolder>
+) {
+    adapter.setOnItemClickListener { _, _, position ->
+        WebViewActivity.newInstance(
+            view.context,
+            adapter.getViewByPosition(position, R.id.cv_project_item),
+            adapter.getItem(position).link,
+            adapter.getItem(position).title
+        )
+    }
+}

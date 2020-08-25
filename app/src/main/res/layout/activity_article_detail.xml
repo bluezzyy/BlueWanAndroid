@@ -10,7 +10,7 @@
 
         <variable
             name="activity"
-            type="com.bluelzy.bluewanandroid.view.detail.ui.ArticleDetailActivity" />
+            type="com.bluelzy.bluewanandroid.view.detail.ui.WebViewActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,5 +1,6 @@
 package com.bluelzy.bluewanandroid.widget
 
+import android.text.Html
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -48,7 +49,7 @@ class AppbarController private constructor(
         }
 
         fun setTitle(title: String): Builder {
-            this.title = title
+            this.title = Html.fromHtml(title).toString()
             return this
         }
 
