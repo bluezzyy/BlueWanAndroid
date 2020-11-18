@@ -50,15 +50,15 @@ class KnowledgeFragment : BaseDataBindingFragment() {
         }.root
 
     override fun initView() {
-        binding.layoutToolbar.toolbar_title.text = "知识体系"
-        binding.rvKnowledgeList.layoutManager = GridLayoutManager(context, 3)
+        binding.layoutToolbar.toolbar_title.text = getString(R.string.title_knowledge)
+        binding.rvKnowledgeList.layoutManager = GridLayoutManager(context, FULL_WIDTH)
             .also { grid ->
                 grid.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
                         return when (adapter.data[position]) {
-                            is KnowledgeData -> 3
-                            is KnowledgeChildren -> 1
-                            else -> 3
+                            is KnowledgeData -> FULL_WIDTH
+                            is KnowledgeChildren -> SINGLE_WIDTH
+                            else -> FULL_WIDTH
                         }
                     }
                 }
@@ -85,6 +85,11 @@ class KnowledgeFragment : BaseDataBindingFragment() {
                 }
             })
         }
+
+    companion object {
+        const val FULL_WIDTH = 3
+        const val SINGLE_WIDTH = 1
+    }
 
 
 }

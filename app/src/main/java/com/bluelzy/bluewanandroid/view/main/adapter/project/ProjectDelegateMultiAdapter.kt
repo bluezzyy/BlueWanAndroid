@@ -14,12 +14,12 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
  *   @date      2020/8/18
  *   @desc
  */
-class ProjectDelegateMultiAdapter: BaseDelegateMultiAdapter<ProjectModelItem, BaseViewHolder>() {
+class ProjectDelegateMultiAdapter : BaseDelegateMultiAdapter<ProjectModelItem, BaseViewHolder>() {
 
     init {
         setMultiTypeDelegate(object : BaseMultiTypeDelegate<ProjectModelItem>() {
             override fun getItemType(data: List<ProjectModelItem>, position: Int): Int {
-               return VIEW_TYPE_PROJECT
+                return VIEW_TYPE_PROJECT
             }
         })
 
@@ -27,14 +27,14 @@ class ProjectDelegateMultiAdapter: BaseDelegateMultiAdapter<ProjectModelItem, Ba
     }
 
     override fun convert(holder: BaseViewHolder, item: ProjectModelItem) {
-        when(holder.itemViewType) {
+        when (holder.itemViewType) {
             VIEW_TYPE_PROJECT -> setupProjectType(holder, item)
         }
     }
 
     private fun setupProjectType(holder: BaseViewHolder, item: ProjectModelItem) {
         with(holder) {
-            setText(R.id.tv_project_name, HtmlCompat.fromHtml(item.name,FROM_HTML_MODE_COMPACT))
+            setText(R.id.tv_project_name, HtmlCompat.fromHtml(item.name, FROM_HTML_MODE_COMPACT))
         }
     }
 

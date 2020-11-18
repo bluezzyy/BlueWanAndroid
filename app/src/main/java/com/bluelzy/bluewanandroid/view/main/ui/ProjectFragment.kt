@@ -39,7 +39,7 @@ class ProjectFragment : BaseDataBindingFragment() {
 
 
     override fun initView() {
-        binding.layoutToolbar.toolbar_title.text = "项目"
+        binding.layoutToolbar.toolbar_title.text = getString(R.string.title_project)
     }
 
     override fun initViewModel() {

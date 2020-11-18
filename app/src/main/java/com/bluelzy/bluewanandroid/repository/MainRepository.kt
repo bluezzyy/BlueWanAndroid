@@ -34,9 +34,7 @@ class MainRepository constructor(
     ) = withContext(Dispatchers.IO) {
         val liveData = MutableLiveData<DashboardArticleModel>()
         var articles = DashboardArticleModel()
-        isLoading = true
         mainClient.fetchDashboardArticles(page) { response ->
-            isLoading = false
             when (response) {
                 is ApiResponse.Success -> {
                     response.data?.let {
@@ -54,9 +52,7 @@ class MainRepository constructor(
     suspend fun loadKnowledgeJson(error: (String) -> Unit) = withContext(Dispatchers.IO) {
         val liveData = MutableLiveData<KnowledgeModel>()
         var json = KnowledgeModel()
-        isLoading = true
         mainClient.fetchKnowledgeJson { response ->
-            isLoading = false
             when (response) {
                 is ApiResponse.Success -> {
                     response.data?.let {
@@ -78,9 +74,7 @@ class MainRepository constructor(
     ) = withContext(Dispatchers.IO) {
         val liveData = MutableLiveData<DashboardArticleModel>()
         var articles = DashboardArticleModel()
-        isLoading = true
         mainClient.fetchKnowledgeCategoryArticles(cid, page) { response ->
-            isLoading = false
             when (response) {
                 is ApiResponse.Success -> {
                     response.data?.let {
@@ -98,9 +92,7 @@ class MainRepository constructor(
     suspend fun loadProjectJson(error: (String) -> Unit) = withContext(Dispatchers.IO) {
         val liveData = MutableLiveData<ProjectModel>()
         var json = ProjectModel()
-        isLoading = true
         mainClient.fetchProjectJson { response ->
-            isLoading = false
             when (response) {
                 is ApiResponse.Success -> {
                     response.data?.let {
@@ -118,9 +110,7 @@ class MainRepository constructor(
     suspend fun loadProjectList(page: Int,cid: Int, error: (String) -> Unit) = withContext(Dispatchers.IO) {
         val liveData = MutableLiveData<ProjectItemModel>()
         var json = ProjectItemModel()
-        isLoading = true
         mainClient.fetchProjectList(page, cid) { response ->
-            isLoading = false
             when (response) {
                 is ApiResponse.Success -> {
                     response.data?.let {
