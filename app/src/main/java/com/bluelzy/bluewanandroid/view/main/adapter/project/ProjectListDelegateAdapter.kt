@@ -2,7 +2,7 @@ package com.bluelzy.bluewanandroid.view.main.adapter.project
 
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.model.ProjectItem
-import com.bumptech.glide.Glide
+import com.bluelzy.bluewanandroid.utils.initImageLoader
 import com.chad.library.adapter.base.BaseDelegateMultiAdapter
 import com.chad.library.adapter.base.delegate.BaseMultiTypeDelegate
 import com.chad.library.adapter.base.module.LoadMoreModule
@@ -37,7 +37,12 @@ class ProjectListDelegateAdapter : BaseDelegateMultiAdapter<ProjectItem, BaseVie
         with(holder) {
             setText(R.id.tv_project_item_name, item.title)
             setText(R.id.tv_project_item_desc, item.desc)
-            Glide.with(context).load(item.envelopePic).into(getView(R.id.iv_project_item_image))
+            initImageLoader(
+                context = context,
+                url = item.envelopePic,
+                isCorner = true,
+                view = getView(R.id.iv_project_item_image)
+            ).loadImage()
         }
     }
 

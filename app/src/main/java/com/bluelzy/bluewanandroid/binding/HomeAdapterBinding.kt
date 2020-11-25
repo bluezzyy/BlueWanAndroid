@@ -28,10 +28,10 @@ fun bindArticleItemClick(
     view: RecyclerView,
     adapter: BaseDelegateMultiAdapter<Article, BaseViewHolder>
 ) {
-    adapter.setOnItemClickListener { _, _, position ->
+    adapter.setOnItemClickListener { _, itemView, position ->
         WebViewActivity.newInstance(
             view.context,
-            adapter.getViewByPosition(position, R.id.cl_item_article),
+            itemView,
             adapter.getItem(position).link,
             adapter.getItem(position).title
         )

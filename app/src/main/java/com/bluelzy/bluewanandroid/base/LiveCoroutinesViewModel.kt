@@ -12,10 +12,10 @@ import kotlinx.coroutines.Dispatchers
  *   @date      2020/4/9
  *   @desc
  */
-abstract class LiveCoroutinesViewModel: ViewModel() {
+abstract class LiveCoroutinesViewModel : ViewModel() {
 
-    inline fun<T> launchOnViewModelScope(crossinline block: suspend () -> LiveData<T>) : LiveData<T> {
-        return liveData(viewModelScope.coroutineContext+ Dispatchers.IO) {
+    inline fun <T> launchOnViewModelScope(crossinline block: suspend () -> LiveData<T>): LiveData<T> {
+        return liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emitSource(block())
         }
     }

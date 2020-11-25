@@ -1,6 +1,6 @@
 # BlueWanAndroid
 
-[中文]() | [English]()
+[中文](https://github.com/bluezzyy/BlueWanAndroid/blob/master/README.md) | [English](https://github.com/bluezzyy/BlueWanAndroid/blob/master/README_EN.md)
 
 
 
@@ -24,7 +24,8 @@
     * Paging (`paging-sample` 分支)
     * Timber
 
-
+* 图片资源来源：
+    * [iconfont - 人工智能](https://www.iconfont.cn/illustrations/detail?spm=a313x.7781069.1998910419.d9df05512&cid=25630)
 
 感谢WanAndroid提供的API， 感谢所有优秀开发者们的优秀的开源项目！
 

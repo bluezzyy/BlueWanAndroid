@@ -13,22 +13,20 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
  *   @author : BlueLzy
  *   @email  : bluehobert@gmail.com
  *   @date   : 2020/05/17
- *   @desc   : Dashboard Multi Item Type Adapter
+ *   @desc   : Dashboard Multi Item Types Adapter
  */
 class HomeDelegateMultiAdapter : BaseDelegateMultiAdapter<Article, BaseViewHolder>(),
     LoadMoreModule {
 
     init {
         setMultiTypeDelegate(object : BaseMultiTypeDelegate<Article>() {
-            override fun getItemType(data: List<Article>, position: Int): Int {
-                return VIEW_TYPE_ARTICLE
-            }
+            override fun getItemType(data: List<Article>, position: Int): Int =
+                VIEW_TYPE_ARTICLE
         })
 
-        getMultiTypeDelegate()?.addItemType(VIEW_TYPE_ARTICLE, R.layout.item_dashboard_article)
-            .let {
-                this.addChildClickViewIds(R.id.iv_favourite_article)
-            }
+        getMultiTypeDelegate()
+            ?.addItemType(VIEW_TYPE_ARTICLE, R.layout.item_dashboard_article)
+            .also { this.addChildClickViewIds(R.id.iv_favourite_article) }
     }
 
     override fun convert(holder: BaseViewHolder, item: Article) {

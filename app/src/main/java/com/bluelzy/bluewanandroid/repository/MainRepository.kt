@@ -1,10 +1,7 @@
 package com.bluelzy.bluewanandroid.repository
 
 import androidx.lifecycle.MutableLiveData
-import com.bluelzy.bluewanandroid.model.DashboardArticleModel
-import com.bluelzy.bluewanandroid.model.KnowledgeModel
-import com.bluelzy.bluewanandroid.model.ProjectItemModel
-import com.bluelzy.bluewanandroid.model.ProjectModel
+import com.bluelzy.bluewanandroid.model.*
 import com.bluelzy.bluewanandroid.network.ApiResponse
 import com.bluelzy.bluewanandroid.network.MainClient
 import com.bluelzy.bluewanandroid.network.message
@@ -26,6 +23,28 @@ class MainRepository constructor(
 
     init {
         Timber.d("Injection MainRepository")
+    }
+
+    suspend fun loadDashboardBanner(
+        succeed: (BannerModel) -> Unit,
+        error: (String) -> Unit
+    ) = withContext(Dispatchers.IO) {
+        val liveData = MutableLiveData<BannerModel>()
+        var banner = BannerModel()
+        mainClient.fetchDashboardBanner { response ->
+            when (response) {
+                is ApiResponse.Success -> {
+                    response.data?.let {
+                        banner = it
+                        succeed(it)
+                    }
+                }
+                is ApiResponse.Failure.Error -> error(response.message())
+                is ApiResponse.Failure.Exception -> error(response.message())
+            }
+        }
+
+        liveData.apply { this.postValue(banner) }
     }
 
     suspend fun loadDashboardArticles(
@@ -107,23 +126,24 @@ class MainRepository constructor(
         liveData.apply { this.postValue(json) }
     }
 
-    suspend fun loadProjectList(page: Int,cid: Int, error: (String) -> Unit) = withContext(Dispatchers.IO) {
-        val liveData = MutableLiveData<ProjectItemModel>()
-        var json = ProjectItemModel()
-        mainClient.fetchProjectList(page, cid) { response ->
-            when (response) {
-                is ApiResponse.Success -> {
-                    response.data?.let {
-                        json = it
-                        liveData.postValue(it)
+    suspend fun loadProjectList(page: Int, cid: Int, error: (String) -> Unit) =
+        withContext(Dispatchers.IO) {
+            val liveData = MutableLiveData<ProjectItemModel>()
+            var json = ProjectItemModel()
+            mainClient.fetchProjectList(page, cid) { response ->
+                when (response) {
+                    is ApiResponse.Success -> {
+                        response.data?.let {
+                            json = it
+                            liveData.postValue(it)
+                        }
                     }
+                    is ApiResponse.Failure.Error -> error(response.message())
+                    is ApiResponse.Failure.Exception -> error(response.message())
                 }
-                is ApiResponse.Failure.Error -> error(response.message())
-                is ApiResponse.Failure.Exception -> error(response.message())
             }
+            liveData.apply { this.postValue(json) }
         }
-        liveData.apply { this.postValue(json) }
-    }
 
 
 }

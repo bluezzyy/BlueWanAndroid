@@ -60,6 +60,7 @@ class CategoryFragment(private val cid: Int, private val toolbarTitle: String) :
                 if (articles.size < 3) adapter.loadMoreModule.loadMoreEnd(true)
             }
             (activity as GeneralActivity).hideSpinner()
+            it.articleData?.articles?.let { it1 -> adapter.addData(it1) }
         })
     }
 

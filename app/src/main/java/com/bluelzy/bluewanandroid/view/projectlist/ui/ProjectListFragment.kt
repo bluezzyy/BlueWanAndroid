@@ -18,7 +18,7 @@ import org.koin.android.viewmodel.ext.android.getViewModel
  *   @author    BlueLzy
  *   @email     bluehobert@gmail.com
  *   @date      2020/8/20
- *   @desc
+ *   @desc      项目列表页
  */
 class ProjectListFragment(private val cid: Int, private val toolbarTitle: String) :
     BaseDataBindingFragment() {
@@ -31,7 +31,7 @@ class ProjectListFragment(private val cid: Int, private val toolbarTitle: String
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? =
+    ): View =
         binding<FragmentProjectListBinding>(inflater, R.layout.fragment_project_list, container)
             .apply {
                 lifecycleOwner = this@ProjectListFragment

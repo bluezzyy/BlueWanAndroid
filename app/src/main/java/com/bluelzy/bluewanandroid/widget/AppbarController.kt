@@ -12,7 +12,7 @@ import com.bluelzy.bluewanandroid.R
  *   @author    BlueLzy
  *   @email     bluehobert@gmail.com
  *   @date      2020/8/16
- *   @desc
+ *   @desc      顶部导航栏
  */
 class AppbarController private constructor(
     private val activity: FragmentActivity?,

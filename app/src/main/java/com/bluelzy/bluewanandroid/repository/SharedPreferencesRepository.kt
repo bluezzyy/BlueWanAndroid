@@ -41,7 +41,13 @@ object SharedPreferencesRepository : KoinComponent {
         }
         .apply()
 
-    fun getKnowledgeJsonData(): String =
-        getDefaultPreferences().getString(PREFERENCES_KEY_KNOWLEDGE_JSON, "") ?: ""
+    fun getKnowledgeJsonData(): String {
+        val result = getDefaultPreferences().getString(PREFERENCES_KEY_KNOWLEDGE_JSON, "") ?: ""
+        return if (result == "{}") {
+            ""
+        } else {
+            result
+        }
+    }
 
 }

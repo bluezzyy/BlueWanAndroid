@@ -44,7 +44,7 @@ class KnowledgeViewModel(private val mainRepository: MainRepository) : LiveCorou
             SharedPreferencesRepository.setKnowledgeUpdateTime(currentTime)
             getNetworkJson()
         } else {
-            Timber.tag("BlueLzy").d("get knowledge from local")
+            Timber.tag("BlueLzy").d("get knowledge from local: ")
             getLocalJsonFile()
         }
     }

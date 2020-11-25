@@ -14,6 +14,7 @@ import com.bluelzy.bluewanandroid.model.KnowledgeData
 import com.bluelzy.bluewanandroid.model.KnowledgeModel
 import com.bluelzy.bluewanandroid.repository.SharedPreferencesRepository
 import com.bluelzy.bluewanandroid.utils.LocalJsonUtils
+import com.bluelzy.bluewanandroid.utils.whatIfNull
 import com.bluelzy.bluewanandroid.view.main.adapter.knowledge.KnowledgeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.view.main.viewmodel.KnowledgeViewModel
 import com.chad.library.adapter.base.entity.node.BaseNode
@@ -38,7 +39,7 @@ class KnowledgeFragment : BaseDataBindingFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = binding<FragmentKnowledgeBinding>(inflater, R.layout.fragment_knowledge, container)
+    ): View = binding<FragmentKnowledgeBinding>(inflater, R.layout.fragment_knowledge, container)
         .apply {
             lifecycleOwner = this@KnowledgeFragment
             this@KnowledgeFragment.binding = this
@@ -73,7 +74,9 @@ class KnowledgeFragment : BaseDataBindingFragment() {
                     KnowledgeModel::class.java
                 )
                 adapter.run {
-                    addData(knowledgeModel.knowledgeList as List<BaseNode>)
+                    // TODO: 列表为空的时候使用空布局
+                    knowledgeModel.knowledgeList.whatIfNull { listOf() }
+                        .also { addData(it) }
                 }
             })
 
@@ -90,6 +93,5 @@ class KnowledgeFragment : BaseDataBindingFragment() {
         const val FULL_WIDTH = 3
         const val SINGLE_WIDTH = 1
     }
-
 
 }

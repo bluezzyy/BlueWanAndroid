@@ -1,9 +1,6 @@
 package com.bluelzy.bluewanandroid.network
 
-import com.bluelzy.bluewanandroid.model.DashboardArticleModel
-import com.bluelzy.bluewanandroid.model.KnowledgeModel
-import com.bluelzy.bluewanandroid.model.ProjectItemModel
-import com.bluelzy.bluewanandroid.model.ProjectModel
+import com.bluelzy.bluewanandroid.model.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,6 +13,9 @@ import retrofit2.http.Query
  *   @desc
  */
 interface BlueWanAndroidService {
+
+    @GET("banner/json")
+    fun fetchDashboardBanner(): Call<BannerModel>
 
     @GET("article/list/{page}/json")
     fun fetchDashboardArticles(@Path("page") page: Int): Call<DashboardArticleModel>
