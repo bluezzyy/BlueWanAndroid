@@ -26,7 +26,8 @@
         <activity android:name=".view.detail.ui.WebViewActivity">
         </activity>
 
-        <activity android:name=".view.detail.ui.GeneralActivity">
+        <activity android:name=".view.detail.ui.GeneralActivity"
+            android:windowSoftInputMode="stateVisible">
         </activity>
     </application>
 

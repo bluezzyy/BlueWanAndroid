@@ -11,7 +11,7 @@ import com.bluelzy.bluewanandroid.databinding.FragmentCategoryBinding
 import com.bluelzy.bluewanandroid.view.category.viewmodel.CategoryViewModel
 import com.bluelzy.bluewanandroid.view.detail.ui.GeneralActivity
 import com.bluelzy.bluewanandroid.view.main.adapter.home.HomeDelegateMultiAdapter
-import com.bluelzy.bluewanandroid.widget.AppbarController
+import com.bluelzy.bluewanandroid.widget.appbar.AppbarController
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 /**
@@ -31,7 +31,7 @@ class CategoryFragment(private val cid: Int, private val toolbarTitle: String) :
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = binding<FragmentCategoryBinding>(inflater, R.layout.fragment_category, container)
+    ): View = binding<FragmentCategoryBinding>(inflater, R.layout.fragment_category, container)
         .apply {
             lifecycleOwner = this@CategoryFragment
             this@CategoryFragment.binding = this
@@ -59,8 +59,11 @@ class CategoryFragment(private val cid: Int, private val toolbarTitle: String) :
             it.articleData?.articles?.let { articles ->
                 if (articles.size < 3) adapter.loadMoreModule.loadMoreEnd(true)
             }
-            (activity as GeneralActivity).hideSpinner()
-            it.articleData?.articles?.let { it1 -> adapter.addData(it1) }
+
+            it.articleData?.articles?.let { article ->
+                adapter.addData(article)
+                (activity as GeneralActivity).hideSpinner()
+            }
         })
     }
 

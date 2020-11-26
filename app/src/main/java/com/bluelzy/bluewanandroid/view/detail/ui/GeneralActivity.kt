@@ -12,12 +12,13 @@ import com.bluelzy.bluewanandroid.extensions.FragmentNavigation
 import com.bluelzy.bluewanandroid.utils.whatIfNull
 import com.bluelzy.bluewanandroid.view.category.ui.CategoryFragment
 import com.bluelzy.bluewanandroid.view.projectlist.ui.ProjectListFragment
+import com.bluelzy.bluewanandroid.view.search.SearchFragment
 
 /**
  *   @author    BlueLzy
  *   @email     bluehobert@gmail.com
  *   @date      2020/8/16
- *   @desc
+ *   @desc      通用的Activity
  */
 class GeneralActivity : BaseDataBindingActivity() {
 
@@ -30,6 +31,7 @@ class GeneralActivity : BaseDataBindingActivity() {
         when (intent.getSerializableExtra(KEY_ACTIVITY_TYPE)) {
             ActivityType.ACTIVITY_KNOWLEDGE -> addCategoryFragment(cid, title)
             ActivityType.ACTIVITY_PROJECT -> addProjectListFragment(cid, title)
+            ActivityType.ACTIVITY_SEARCH_AUTHOR -> addSearchFragment()
         }
     }
 
@@ -47,6 +49,11 @@ class GeneralActivity : BaseDataBindingActivity() {
             this,
             ProjectListFragment(cid, title)
         )
+    }
+
+    private fun addSearchFragment() {
+        showSpinner()
+        FragmentNavigation.addFragment(this, SearchFragment())
     }
 
     override fun onBackPressed() {
@@ -67,7 +74,8 @@ class GeneralActivity : BaseDataBindingActivity() {
 
     enum class ActivityType {
         ACTIVITY_KNOWLEDGE,
-        ACTIVITY_PROJECT
+        ACTIVITY_PROJECT,
+        ACTIVITY_SEARCH_AUTHOR,
     }
 
     companion object {

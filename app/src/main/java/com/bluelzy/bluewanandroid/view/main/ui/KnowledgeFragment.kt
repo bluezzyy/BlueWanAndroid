@@ -15,6 +15,7 @@ import com.bluelzy.bluewanandroid.model.KnowledgeModel
 import com.bluelzy.bluewanandroid.repository.SharedPreferencesRepository
 import com.bluelzy.bluewanandroid.utils.LocalJsonUtils
 import com.bluelzy.bluewanandroid.utils.whatIfNull
+import com.bluelzy.bluewanandroid.view.detail.ui.GeneralActivity
 import com.bluelzy.bluewanandroid.view.main.adapter.knowledge.KnowledgeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.view.main.viewmodel.KnowledgeViewModel
 import com.chad.library.adapter.base.entity.node.BaseNode
@@ -51,6 +52,15 @@ class KnowledgeFragment : BaseDataBindingFragment() {
         }.root
 
     override fun initView() {
+        binding.layoutToolbar.toolbar_search.run {
+            visibility = View.VISIBLE
+            setOnClickListener {
+                GeneralActivity.newInstance(
+                    GeneralActivity.ActivityType.ACTIVITY_SEARCH_AUTHOR,
+                    context
+                )
+            }
+        }
         binding.layoutToolbar.toolbar_title.text = getString(R.string.title_knowledge)
         binding.rvKnowledgeList.layoutManager = GridLayoutManager(context, FULL_WIDTH)
             .also { grid ->
@@ -90,7 +100,7 @@ class KnowledgeFragment : BaseDataBindingFragment() {
         }
 
     companion object {
-        const val FULL_WIDTH = 3
+        const val FULL_WIDTH = 4
         const val SINGLE_WIDTH = 1
     }
 

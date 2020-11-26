@@ -22,7 +22,7 @@ class ProjectFragment : BaseDataBindingFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = binding<FragmentProjectBinding>(inflater, R.layout.fragment_project, container)
+    ): View = binding<FragmentProjectBinding>(inflater, R.layout.fragment_project, container)
         .apply {
             lifecycleOwner = this@ProjectFragment
             this@ProjectFragment.binding = this

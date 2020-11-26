@@ -16,7 +16,7 @@ import com.bluelzy.bluewanandroid.base.BaseDataBindingActivity
 import com.bluelzy.bluewanandroid.databinding.ActivityArticleDetailBinding
 import com.bluelzy.bluewanandroid.extensions.applyMaterialTransform
 import com.bluelzy.bluewanandroid.utils.whatIfNull
-import com.bluelzy.bluewanandroid.widget.AppbarController
+import com.bluelzy.bluewanandroid.widget.appbar.AppbarController
 
 /**
  *   @author : BlueLzy

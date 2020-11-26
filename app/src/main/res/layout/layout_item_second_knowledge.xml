@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:elevation="10dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="6dp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
@@ -14,6 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:gravity="center"
         android:padding="4dp"
         android:textColor="@color/black"

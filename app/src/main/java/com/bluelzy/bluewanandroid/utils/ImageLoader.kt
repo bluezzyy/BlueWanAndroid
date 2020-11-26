@@ -30,6 +30,8 @@ import java.io.File
 /**
  *  使用接口[ImageLoader] 而不是使用**建造者模式**的原因是在Kotlin中可选参数更加方便，可省略get/set方法
  *  同时又能达到用户自行设置不同图片来源的目的。如果后续需要添加监听或者其他变换，可以用DSL的形式。
+ *
+ *  传统的Builder模式可以参考 {@see [com.bluelzy.bluewanandroid.widget.AppbarController]}
  */
 interface ImageLoader {
     fun loadImage()

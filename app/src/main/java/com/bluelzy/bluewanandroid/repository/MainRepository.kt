@@ -145,5 +145,26 @@ class MainRepository constructor(
             liveData.apply { this.postValue(json) }
         }
 
+    // TODO: 改成真正的接口
+    suspend fun searchByAuthor(author: String, error: (String) -> Unit) =
+        withContext(Dispatchers.IO) {
+            val liveData = MutableLiveData<ProjectModel>()
+            var json = ProjectModel()
+
+            mainClient.fetchProjectJson { response ->
+                when (response) {
+                    is ApiResponse.Success -> {
+                        response.data?.let {
+                            json = it
+                            liveData.postValue(it)
+                        }
+                    }
+                    is ApiResponse.Failure.Error -> error(response.message())
+                    is ApiResponse.Failure.Exception -> error(response.message())
+                }
+            }
+
+            liveData.apply { this.postValue(json) }
+        }
 
 }

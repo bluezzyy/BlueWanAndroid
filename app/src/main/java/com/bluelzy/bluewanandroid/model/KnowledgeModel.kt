@@ -30,7 +30,7 @@ data class KnowledgeData(
         isExpanded = false
     }
 
-    override val childNode: MutableList<BaseNode>?
+    override val childNode: MutableList<BaseNode>
         get() = children.toMutableList()
 }
 

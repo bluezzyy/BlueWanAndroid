@@ -1,6 +1,7 @@
 package com.bluelzy.bluewanandroid.view.main.ui
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,25 @@ class HomeFragment : BaseDataBindingFragment(), KoinComponent {
 
     private lateinit var adapter: HomeDelegateMultiAdapter
 
+    private lateinit var bannerAdapter: BannerViewAdapter
+
+    private lateinit var viewPager: ViewPager2
+
+    private val bannerHandler: Handler = Handler()
+    private val task = object : Runnable {
+        override fun run() {
+            val page = viewPager.currentItem + 1
+            viewPager.currentItem = page
+
+            // Banner只会播放一次，到最后一个节点结束
+            if (page != bannerAdapter.itemCount) {
+                bannerHandler.postDelayed(this, BANNER_INTERVAL)
+            } else {
+                bannerHandler.removeCallbacks(this)
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,15 +78,25 @@ class HomeFragment : BaseDataBindingFragment(), KoinComponent {
         })
 
         viewModel.bannerLiveData.observe(this, Observer {
-            val view =
-                LayoutInflater.from(context).inflate(R.layout.item_dashboard_banner, null)
-            val viewPager = view.findViewById<ViewPager2>(R.id.vp_dashboard_banner)
-            (viewPager as ViewPager2).adapter = BannerViewAdapter(it.banners)
-
+            // Banner
+            val view = LayoutInflater.from(context).inflate(R.layout.item_dashboard_banner, null)
+            viewPager = view.findViewById(R.id.vp_dashboard_banner)
+            viewPager.adapter = BannerViewAdapter(it.banners)
+                .also { adapter -> bannerAdapter = adapter }
             if (it.banners.isNotEmpty()) {
                 adapter.addHeaderView(view, 0)
                 binding.rvHomeList.scrollToPosition(0)
+                bannerHandler.postDelayed(task, BANNER_INTERVAL)
             }
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        bannerHandler.removeCallbacks(task)
+    }
+
+    companion object {
+        const val BANNER_INTERVAL = 6000L
     }
 }

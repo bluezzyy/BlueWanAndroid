@@ -8,4 +8,8 @@
     <string name="dashboard_author">作者： %s</string>
     <string name="dashboard_share_user">分享人： %s</string>
     <string name="dashboard_share_time">时间： %s</string>
+
+    <!-- 搜索 -->
+    <string name="search_button">搜索</string>
+    <string name="search_author_hint">输入想搜索的作者名字…</string>
 </resources>

@@ -35,7 +35,10 @@ class ProjectDelegateMultiAdapter : BaseDelegateMultiAdapter<ProjectModelItem, B
     private fun setupProjectType(holder: BaseViewHolder, item: ProjectModelItem) {
         with(holder) {
             setText(R.id.tv_project_name, HtmlCompat.fromHtml(item.name, FROM_HTML_MODE_COMPACT))
-            setBackgroundResource(R.id.iv_project_logo, BACKGROUND_ARRAY[holder.adapterPosition % BACKGROUND_ARRAY.size] )
+            setBackgroundResource(
+                R.id.iv_project_logo,
+                BACKGROUND_ARRAY[holder.adapterPosition % BACKGROUND_ARRAY.size]
+            )
         }
     }
 

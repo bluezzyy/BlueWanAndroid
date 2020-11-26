@@ -11,7 +11,7 @@ import com.bluelzy.bluewanandroid.databinding.FragmentProjectListBinding
 import com.bluelzy.bluewanandroid.view.detail.ui.GeneralActivity
 import com.bluelzy.bluewanandroid.view.main.adapter.project.ProjectListDelegateAdapter
 import com.bluelzy.bluewanandroid.view.projectlist.viewmodel.ProjectListViewModel
-import com.bluelzy.bluewanandroid.widget.AppbarController
+import com.bluelzy.bluewanandroid.widget.appbar.AppbarController
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 /**
