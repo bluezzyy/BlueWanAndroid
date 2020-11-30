@@ -73,6 +73,7 @@ Because the project itself is to learn MVVM+Jetpack, and some new technologies, 
 
 * 2020/06/07 Complete the basic functions of the homepage feature.
 * 2020/08/08 Complete the basic functions of the knowledge feature.
+* 2020/11/27 Complete the basic functions of the project feature and search articles by the author.
 
 
 ## LICENSE
