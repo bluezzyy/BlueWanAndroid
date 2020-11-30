@@ -3,16 +3,18 @@ package com.bluelzy.bluewanandroid.view.detail.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.NonNull
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.base.BaseDataBindingActivity
 import com.bluelzy.bluewanandroid.databinding.ActivityGeneralDetailBinding
 import com.bluelzy.bluewanandroid.extensions.FragmentNavigation
+import com.bluelzy.bluewanandroid.utils.ViewUtil
 import com.bluelzy.bluewanandroid.utils.whatIfNull
 import com.bluelzy.bluewanandroid.view.category.ui.CategoryFragment
 import com.bluelzy.bluewanandroid.view.projectlist.ui.ProjectListFragment
-import com.bluelzy.bluewanandroid.view.search.SearchFragment
+import com.bluelzy.bluewanandroid.view.search.ui.SearchFragment
 
 /**
  *   @author    BlueLzy
@@ -70,6 +72,16 @@ class GeneralActivity : BaseDataBindingActivity() {
 
     fun hideSpinner() {
         binding.progressBar.visibility = View.GONE
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+            val currentView = currentFocus
+            if (ViewUtil.isShouldHideSoftInput(currentView, ev)) {
+                ViewUtil.hideSoftInput(currentView)
+            }
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     enum class ActivityType {

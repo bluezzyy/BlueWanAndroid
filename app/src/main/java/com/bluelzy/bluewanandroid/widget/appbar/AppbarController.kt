@@ -54,7 +54,6 @@ class AppbarController private constructor(
                 searchImageButton.visibility = View.VISIBLE
                 searchImageButton.setOnClickListener {
                     if (listener != null && searchEditText.text.isNotEmpty()) {
-                        // TODO: 搜索
                         listener.onSearchIconClick(searchEditText.text.toString())
                     }
                 }

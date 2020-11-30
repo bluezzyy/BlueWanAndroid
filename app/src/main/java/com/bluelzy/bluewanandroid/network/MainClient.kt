@@ -28,8 +28,7 @@ class MainClient(private val blueWanAndroidService: BlueWanAndroidService) {
     fun fetchKnowledgeCategoryArticles(
         cid: Int,
         page: Int,
-        onResult: (response: ApiResponse<DashboardArticleModel>) -> Unit
-    ) {
+        onResult: (response: ApiResponse<DashboardArticleModel>) -> Unit) {
         this.blueWanAndroidService.fetchKnowledgeCategoryArticles(page, cid).transform(onResult)
     }
 
@@ -40,9 +39,16 @@ class MainClient(private val blueWanAndroidService: BlueWanAndroidService) {
     fun fetchProjectList(
         page: Int,
         cid: Int,
-        onResult: (response: ApiResponse<ProjectItemModel>) -> Unit
-    ) {
+        onResult: (response: ApiResponse<ProjectItemModel>) -> Unit) {
         this.blueWanAndroidService.fetchProjectList(page, cid).transform(onResult)
+    }
+
+    fun searchByAuthor(
+        page: Int,
+        author: String,
+        onResult: (response: ApiResponse<SearchAuthorModel>) -> Unit
+    ) {
+        this.blueWanAndroidService.searchByAuthor(page, author).transform(onResult)
     }
 
 }

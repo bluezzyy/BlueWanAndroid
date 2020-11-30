@@ -77,8 +77,7 @@ class LoadImageFromRes(
     private val isCircle: Boolean,
     private val isCorner: Boolean,
     val view: ImageView
-) :
-    ImageLoader {
+) : ImageLoader {
     override fun loadImage() {
         Glide.with(context)
             .load(id)
@@ -133,8 +132,7 @@ class LoadImageFromFile(
     private val isCircle: Boolean,
     private val isCorner: Boolean,
     val view: ImageView
-) :
-    ImageLoader {
+) : ImageLoader {
     override fun loadImage() {
         Glide.with(context)
             .load(file)
@@ -161,8 +159,7 @@ class LoadImageFromUrl(
     private val isCircle: Boolean,
     private val isCorner: Boolean,
     val view: ImageView
-) :
-    ImageLoader {
+) : ImageLoader {
     override fun loadImage() {
         Glide.with(context)
             .load(url)

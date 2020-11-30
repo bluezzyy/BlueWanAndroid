@@ -35,4 +35,7 @@ interface BlueWanAndroidService {
     @GET("project/list/{page}/json")
     fun fetchProjectList(@Path("page") page: Int, @Query("cid") cid: Int): Call<ProjectItemModel>
 
+    @GET("article/list/{page}/json")
+    fun searchByAuthor(@Path("page") page: Int, @Query("author") author: String)
+        : Call<SearchAuthorModel>
 }

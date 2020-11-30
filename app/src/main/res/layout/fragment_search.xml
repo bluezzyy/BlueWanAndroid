@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.bluelzy.bluewanandroid.view.search.viewmodel.SearchViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.bluelzy.bluewanandroid.view.search.ui.SearchDelegateAdapter" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -7,7 +20,28 @@
 
         <include
             android:id="@+id/layout_toolbar"
-            layout="@layout/toolbar_detail"/>
+            layout="@layout/toolbar_detail" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:adapter="@{adapter}"
+            app:adapterSearchList="@{viewModel.searchLiveData.searchData.dataList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_toolbar"
+            app:searchItemClick="@{adapter}"
+            app:toast="@{viewModel.toastLiveData}"
+            tools:listitem="@layout/item_dashboard_article" />
+
+        <include
+            android:id="@+id/id_layout_tips"
+            layout="@layout/layout_tips"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_toolbar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

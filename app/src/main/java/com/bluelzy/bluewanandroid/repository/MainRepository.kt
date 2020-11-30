@@ -1,5 +1,6 @@
 package com.bluelzy.bluewanandroid.repository
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.bluelzy.bluewanandroid.model.*
 import com.bluelzy.bluewanandroid.network.ApiResponse
@@ -145,13 +146,12 @@ class MainRepository constructor(
             liveData.apply { this.postValue(json) }
         }
 
-    // TODO: 改成真正的接口
-    suspend fun searchByAuthor(author: String, error: (String) -> Unit) =
+    suspend fun searchByAuthor(page: Int, author: String, error: (String) -> Unit) =
         withContext(Dispatchers.IO) {
-            val liveData = MutableLiveData<ProjectModel>()
-            var json = ProjectModel()
+            val liveData = MutableLiveData<SearchAuthorModel>()
+            var json = SearchAuthorModel()
 
-            mainClient.fetchProjectJson { response ->
+            mainClient.searchByAuthor(page, author) { response ->
                 when (response) {
                     is ApiResponse.Success -> {
                         response.data?.let {
