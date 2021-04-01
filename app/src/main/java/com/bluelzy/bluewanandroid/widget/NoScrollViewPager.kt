@@ -19,6 +19,11 @@ class NoScrollViewPager(context: Context, attrs: AttributeSet? = null) : ViewPag
     private var isCanScroll = false
 
     /**
+     *  默认没有滚动效果
+     */
+    private var isSmoothScroll = false
+
+    /**
      * 设置其是否能滑动换页
      *
      * @param isCanScroll false 不能换页， true 可以滑动换页
@@ -27,9 +32,25 @@ class NoScrollViewPager(context: Context, attrs: AttributeSet? = null) : ViewPag
         this.isCanScroll = isCanScroll
     }
 
+    /**
+     *  设置是否有滑动效果
+     *
+     *  @param isSmoothScroll false 没有滑动效果 true 有滑动效果
+     */
+    fun setSmoothScroll(isSmoothScroll:Boolean) {
+        this.isSmoothScroll = isSmoothScroll
+    }
+
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean =
         isCanScroll && super.onInterceptTouchEvent(ev)
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(ev: MotionEvent): Boolean = isCanScroll && super.onTouchEvent(ev)
+
+    /**
+     * 去除页面切换时的滑动效果
+     */
+    override fun setCurrentItem(item: Int) {
+        super.setCurrentItem(item, isSmoothScroll)
+    }
 }
