@@ -26,7 +26,8 @@ class SearchViewModel(
     private var _showSpinnerLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showSpinnerLiveData: LiveData<Boolean> = _showSpinnerLiveData
 
-    private var page: Int = 0
+    val page: Int get() = _page
+    private var _page: Int = 0
 
     init {
         Timber.d("injection SearchViewModel")
@@ -44,10 +45,13 @@ class SearchViewModel(
     /**
      *  [keyword] as the author name for search.
      */
-    fun searchByAuthor(keyword: String) = searchFetchLiveData.postValue(Pair(0, keyword))
+    fun searchByAuthor(keyword: String) {
+        _page = 0
+        searchFetchLiveData.postValue(Pair(_page, keyword))
+    }
 
     /**
      * Load more data for the current [keyword]
      */
-    fun loadMoreByAuthor(keyword: String) = searchFetchLiveData.postValue(Pair(page++, keyword))
+    fun loadMoreByAuthor(keyword: String) = searchFetchLiveData.postValue(Pair(++_page, keyword))
 }

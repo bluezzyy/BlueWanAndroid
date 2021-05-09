@@ -14,6 +14,7 @@ import com.bluelzy.bluewanandroid.view.search.viewmodel.SearchViewModel
 import com.bluelzy.bluewanandroid.widget.appbar.AppBarListener
 import com.bluelzy.bluewanandroid.widget.appbar.AppbarController
 import com.bluelzy.bluewanandroid.widget.tips.AppTipsController
+import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 /**
@@ -46,7 +47,9 @@ class SearchFragment : BaseDataBindingFragment(), AppBarListener {
             viewModel = getViewModel<SearchViewModel>()
                 .also { this@SearchFragment.viewModel = it }
             adapter = SearchDelegateAdapter().apply {
-                loadMoreModule.setOnLoadMoreListener { (viewModel as SearchViewModel).loadMoreByAuthor(keyword) }
+                loadMoreModule.setOnLoadMoreListener {
+                    (viewModel as SearchViewModel).loadMoreByAuthor(keyword)
+                }
             }.also { this@SearchFragment.adapter = it }
         }.root
 
@@ -72,13 +75,17 @@ class SearchFragment : BaseDataBindingFragment(), AppBarListener {
     }
 
     override fun initViewModel() {
-        viewModel.searchLiveData.observe(this, Observer { viewModel ->
+        viewModel.searchLiveData.observe(this, Observer { searchList ->
             (activity as GeneralActivity).hideSpinner()
-            viewModel.searchData?.dataList?.whatIfNotNullOrEmpty({
+            searchList.searchData?.dataList?.whatIfNotNullOrEmpty({
+                if (it.size < 10) adapter.loadMoreModule.loadMoreEnd(true)
                 tipsLayout.gone()
             }, {
-                tipsLayout.show()
-                tipsLayout.setNoResultText(keyword)
+                adapter.loadMoreModule.loadMoreEnd(true)
+                if (viewModel.page == 0) {
+                    tipsLayout.show()
+                    tipsLayout.setNoResultText(keyword)
+                }
             })
         })
 
@@ -98,6 +105,11 @@ class SearchFragment : BaseDataBindingFragment(), AppBarListener {
     override fun onSearchIconClick(keyword: String) {
         this.keyword = keyword
         (activity as GeneralActivity).showSpinner()
+        if (adapter.itemCount > 0) {
+            rv_search_list.removeAllViews()
+            adapter.data = mutableListOf()
+        }
+
         viewModel.searchByAuthor(keyword)
     }
 }
