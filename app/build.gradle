@@ -42,7 +42,6 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.core:core-ktx:$versions.coreKtxVersion"
 
     //Support Library
@@ -51,7 +50,6 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintVersion"
 
     //Architecture Components
-    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.fragmentKtxVersion"

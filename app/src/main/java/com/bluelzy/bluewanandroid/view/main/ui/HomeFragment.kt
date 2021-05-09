@@ -35,18 +35,15 @@ class HomeFragment : BaseDataBindingFragment(), KoinComponent {
 
     private lateinit var viewPager: ViewPager2
 
+    private var currentPage = 1
+    private var hasBeenCarousel = true
+
     private val bannerHandler: Handler = Handler()
     private val task = object : Runnable {
         override fun run() {
-            val page = viewPager.currentItem + 1
-            viewPager.currentItem = page
-
-            // Banner只会播放一次，到最后一个节点结束
-            if (page != bannerAdapter.itemCount) {
-                bannerHandler.postDelayed(this, BANNER_INTERVAL)
-            } else {
-                bannerHandler.removeCallbacks(this)
-            }
+            currentPage = viewPager.currentItem + 1
+            viewPager.currentItem = currentPage
+            bannerHandler.postDelayed(this, BANNER_INTERVAL)
         }
     }
 
@@ -81,9 +78,28 @@ class HomeFragment : BaseDataBindingFragment(), KoinComponent {
             // Banner
             val view = LayoutInflater.from(context).inflate(R.layout.item_dashboard_banner, null)
             viewPager = view.findViewById(R.id.vp_dashboard_banner)
-            viewPager.adapter = BannerViewAdapter(it.banners)
+            viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    currentPage = position
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    if (state == ViewPager2.SCROLL_STATE_IDLE) {
+                        if (currentPage == 0) {
+                            viewPager.setCurrentItem(bannerAdapter.itemCount - 2, false)
+                        } else if (currentPage == bannerAdapter.itemCount - 1) {
+                            viewPager.setCurrentItem(1, false)
+                        }
+                    }
+                }
+
+            })
+
+            viewPager.adapter = BannerViewAdapter(it)
                 .also { adapter -> bannerAdapter = adapter }
-            if (it.banners.isNotEmpty()) {
+            if (it.isNotEmpty()) {
                 adapter.addHeaderView(view, 0)
                 binding.rvHomeList.scrollToPosition(0)
                 bannerHandler.postDelayed(task, BANNER_INTERVAL)
@@ -91,8 +107,16 @@ class HomeFragment : BaseDataBindingFragment(), KoinComponent {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (!hasBeenCarousel) {
+            bannerHandler.postDelayed(task, BANNER_INTERVAL)
+        }
+    }
+
     override fun onStop() {
         super.onStop()
+        hasBeenCarousel = false
         bannerHandler.removeCallbacks(task)
     }
 
