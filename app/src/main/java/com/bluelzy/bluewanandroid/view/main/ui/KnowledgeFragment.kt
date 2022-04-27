@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bluelzy.bluewanandroid.R
 import com.bluelzy.bluewanandroid.base.BaseDataBindingFragment
@@ -78,7 +77,7 @@ class KnowledgeFragment : BaseDataBindingFragment() {
 
     override fun initViewModel() =
         viewModel.run {
-            localKnowledgeData.observe(viewLifecycleOwner, Observer {
+            localKnowledgeData.observe(viewLifecycleOwner) {
                 val knowledgeModel = LocalJsonUtils.jsonToObject(
                     SharedPreferencesRepository.getKnowledgeJsonData(),
                     KnowledgeModel::class.java
@@ -88,15 +87,15 @@ class KnowledgeFragment : BaseDataBindingFragment() {
                     knowledgeModel.knowledgeList.whatIfNull { listOf() }
                         .also { addData(it) }
                 }
-            })
+            }
 
-            knowledgeLiveData.observe(viewLifecycleOwner, Observer {
+            knowledgeLiveData.observe(viewLifecycleOwner) {
                 SharedPreferencesRepository.setKnowledgeJsonData(Gson().toJson(it).toString())
                 adapter.run {
                     if (!it.knowledgeList.isNullOrEmpty())
                         addData(it.knowledgeList as List<BaseNode>)
                 }
-            })
+            }
         }
 
     companion object {

@@ -2,6 +2,7 @@ package com.bluelzy.bluewanandroid.view.main.ui
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,12 +39,14 @@ class HomeFragment : BaseDataBindingFragment(), KoinComponent {
     private var currentPage = 1
     private var hasBeenCarousel = true
 
-    private val bannerHandler: Handler = Handler()
+    private val bannerHandler: Handler = Handler(Looper.getMainLooper())
     private val task = object : Runnable {
         override fun run() {
-            currentPage = viewPager.currentItem + 1
-            viewPager.currentItem = currentPage
-            bannerHandler.postDelayed(this, BANNER_INTERVAL)
+            if (::viewPager.isInitialized) {
+                currentPage = viewPager.currentItem + 1
+                viewPager.currentItem = currentPage
+                bannerHandler.postDelayed(this, BANNER_INTERVAL)
+            }
         }
     }
 

@@ -6,7 +6,6 @@ apply from: '../dependencies.gradle'
 
 android {
     compileSdkVersion versions.compileSdk
-    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.bluelzy.bluewanandroid"

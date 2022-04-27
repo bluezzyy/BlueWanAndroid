@@ -1,5 +1,6 @@
 package com.bluelzy.bluewanandroid.repository
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import org.koin.core.KoinComponent
@@ -10,6 +11,7 @@ import org.koin.core.KoinComponent
  *   @date      2020/8/8
  *   @desc
  */
+@SuppressLint("StaticFieldLeak")
 object SharedPreferencesRepository : KoinComponent {
 
     // Default SharedPreferences File Name
