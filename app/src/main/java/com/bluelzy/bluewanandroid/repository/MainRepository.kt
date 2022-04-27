@@ -6,6 +6,7 @@ import com.bluelzy.bluewanandroid.model.*
 import com.bluelzy.bluewanandroid.network.ApiResponse
 import com.bluelzy.bluewanandroid.network.MainClient
 import com.bluelzy.bluewanandroid.network.message
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -17,7 +18,8 @@ import timber.log.Timber
  *   @desc
  */
 class MainRepository constructor(
-    private val mainClient: MainClient
+    private val mainClient: MainClient,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : Repository {
 
     override var isLoading: Boolean = false
@@ -29,7 +31,7 @@ class MainRepository constructor(
     suspend fun loadDashboardBanner(
         succeed: (BannerModel) -> Unit,
         error: (String) -> Unit
-    ) = withContext(Dispatchers.IO) {
+    ) = withContext(ioDispatcher) {
         val liveData = MutableLiveData<BannerModel>()
         var banner = BannerModel()
         mainClient.fetchDashboardBanner { response ->
@@ -51,7 +53,7 @@ class MainRepository constructor(
     suspend fun loadDashboardArticles(
         page: Int,
         error: (String) -> Unit
-    ) = withContext(Dispatchers.IO) {
+    ) = withContext(ioDispatcher) {
         val liveData = MutableLiveData<DashboardArticleModel>()
         var articles = DashboardArticleModel()
         mainClient.fetchDashboardArticles(page) { response ->
@@ -91,7 +93,7 @@ class MainRepository constructor(
         cid: Int,
         page: Int,
         error: (String) -> Unit
-    ) = withContext(Dispatchers.IO) {
+    ) = withContext(ioDispatcher) {
         val liveData = MutableLiveData<DashboardArticleModel>()
         var articles = DashboardArticleModel()
         mainClient.fetchKnowledgeCategoryArticles(cid, page) { response ->
@@ -128,7 +130,7 @@ class MainRepository constructor(
     }
 
     suspend fun loadProjectList(page: Int, cid: Int, error: (String) -> Unit) =
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             val liveData = MutableLiveData<ProjectItemModel>()
             var json = ProjectItemModel()
             mainClient.fetchProjectList(page, cid) { response ->
@@ -147,7 +149,7 @@ class MainRepository constructor(
         }
 
     suspend fun searchByAuthor(page: Int, author: String, error: (String) -> Unit) =
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             val liveData = MutableLiveData<SearchAuthorModel>()
             var json = SearchAuthorModel()
 
