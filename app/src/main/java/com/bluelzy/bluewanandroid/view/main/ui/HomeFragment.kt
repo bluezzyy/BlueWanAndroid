@@ -14,8 +14,8 @@ import com.bluelzy.bluewanandroid.base.BaseDataBindingFragment
 import com.bluelzy.bluewanandroid.databinding.FragmentHomeBinding
 import com.bluelzy.bluewanandroid.view.main.adapter.home.HomeDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.view.main.viewmodel.HomeViewModel
-import org.koin.android.viewmodel.ext.android.getViewModel
-import org.koin.core.KoinComponent
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.core.component.KoinComponent
 
 /**
  *   @author    BlueLzy

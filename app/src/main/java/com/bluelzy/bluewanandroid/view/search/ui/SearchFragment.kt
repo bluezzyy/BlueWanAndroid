@@ -15,7 +15,7 @@ import com.bluelzy.bluewanandroid.widget.appbar.AppBarListener
 import com.bluelzy.bluewanandroid.widget.appbar.AppbarController
 import com.bluelzy.bluewanandroid.widget.tips.AppTipsController
 import kotlinx.android.synthetic.main.fragment_search.*
-import org.koin.android.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
  *   @author    BlueLzy

@@ -12,7 +12,7 @@ import com.bluelzy.bluewanandroid.view.detail.ui.GeneralActivity
 import com.bluelzy.bluewanandroid.view.main.adapter.project.ProjectListDelegateAdapter
 import com.bluelzy.bluewanandroid.view.projectlist.viewmodel.ProjectListViewModel
 import com.bluelzy.bluewanandroid.widget.appbar.AppbarController
-import org.koin.android.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
  *   @author    BlueLzy

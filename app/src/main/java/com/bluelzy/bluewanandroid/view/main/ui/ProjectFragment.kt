@@ -11,7 +11,7 @@ import com.bluelzy.bluewanandroid.databinding.FragmentProjectBinding
 import com.bluelzy.bluewanandroid.view.main.adapter.project.ProjectDelegateMultiAdapter
 import com.bluelzy.bluewanandroid.view.main.viewmodel.ProjectViewModel
 import kotlinx.android.synthetic.main.toolbar_home.view.*
-import org.koin.android.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class ProjectFragment : BaseDataBindingFragment() {
 

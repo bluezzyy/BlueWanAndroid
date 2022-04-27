@@ -20,7 +20,7 @@ import com.bluelzy.bluewanandroid.view.main.viewmodel.KnowledgeViewModel
 import com.chad.library.adapter.base.entity.node.BaseNode
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.toolbar_home.view.*
-import org.koin.android.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 /**
  *   @author    BlueLzy

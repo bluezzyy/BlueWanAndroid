@@ -6,7 +6,7 @@ import com.bluelzy.bluewanandroid.view.main.viewmodel.KnowledgeViewModel
 import com.bluelzy.bluewanandroid.view.main.viewmodel.ProjectViewModel
 import com.bluelzy.bluewanandroid.view.projectlist.viewmodel.ProjectListViewModel
 import com.bluelzy.bluewanandroid.view.search.viewmodel.SearchViewModel
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**

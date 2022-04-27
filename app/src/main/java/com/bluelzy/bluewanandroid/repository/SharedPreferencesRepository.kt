@@ -3,7 +3,7 @@ package com.bluelzy.bluewanandroid.repository
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import org.koin.core.KoinComponent
+import org.koin.core.component.KoinComponent
 
 /**
  *   @author    BlueLzy

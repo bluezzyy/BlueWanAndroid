@@ -88,7 +88,7 @@ class WebViewActivity : BaseDataBindingActivity() {
             webViewClient = myWebViewClient
             settings.javaScriptEnabled = true
         }
-        binding.wvContent.loadUrl(intent.getStringExtra(KEY_ARTICLE_LINK))
+        binding.wvContent.loadUrl(intent.getStringExtra(KEY_ARTICLE_LINK)!!)
     }
 
     override fun onBackPressed() {

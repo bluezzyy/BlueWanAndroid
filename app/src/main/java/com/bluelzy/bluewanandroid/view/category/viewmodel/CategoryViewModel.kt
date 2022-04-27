@@ -6,7 +6,7 @@ import androidx.lifecycle.switchMap
 import com.bluelzy.bluewanandroid.base.LiveCoroutinesViewModel
 import com.bluelzy.bluewanandroid.model.DashboardArticleModel
 import com.bluelzy.bluewanandroid.repository.MainRepository
-import org.koin.core.KoinComponent
+import org.koin.core.component.KoinComponent
 import timber.log.Timber
 
 /**
